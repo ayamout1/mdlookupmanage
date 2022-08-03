@@ -19,7 +19,6 @@ class GlobalSearchController extends Controller
         'Product'       => 'cruds.product.title',
         'Service'       => 'cruds.service.title',
         'VendorNumber'  => 'cruds.vendorNumber.title',
-        'Warranty'      => 'cruds.warranty.title',
     ];
 
     public function search(Request $request)

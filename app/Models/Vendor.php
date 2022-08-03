@@ -44,44 +44,9 @@ class Vendor extends Model
         return $this->hasMany(Contact::class, 'vendor_id', 'id');
     }
 
-    public function vendorNotes()
-    {
-        return $this->hasMany(Note::class, 'vendor_id', 'id');
-    }
-
-    public function vendorPreludeNumbers()
-    {
-        return $this->hasMany(PreludeNumber::class, 'vendor_id', 'id');
-    }
-
-    public function vendorVendorNumbers()
-    {
-        return $this->hasMany(VendorNumber::class, 'vendor_id', 'id');
-    }
-
-    public function vendorWarranties()
-    {
-        return $this->hasMany(Warranty::class, 'vendor_id', 'id');
-    }
-
     public function vendorBrands()
     {
         return $this->belongsToMany(Brand::class);
-    }
-
-    public function vendorEngines()
-    {
-        return $this->belongsToMany(Engine::class);
-    }
-
-    public function vendorProducts()
-    {
-        return $this->belongsToMany(Product::class);
-    }
-
-    public function vendorServices()
-    {
-        return $this->belongsToMany(Service::class);
     }
 
     protected function serializeDate(DateTimeInterface $date)
