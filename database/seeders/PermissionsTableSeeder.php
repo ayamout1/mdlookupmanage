@@ -456,6 +456,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 112,
+                'title' => 'warranty_create',
+            ],
+            [
+                'id'    => 113,
+                'title' => 'warranty_edit',
+            ],
+            [
+                'id'    => 114,
+                'title' => 'warranty_show',
+            ],
+            [
+                'id'    => 115,
+                'title' => 'warranty_delete',
+            ],
+            [
+                'id'    => 116,
+                'title' => 'warranty_access',
+            ],
+            [
+                'id'    => 117,
                 'title' => 'profile_password_edit',
             ],
         ];
