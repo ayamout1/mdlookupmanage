@@ -358,6 +358,18 @@
                         </ul>
                     </li>
                 @endcan
+                @can('warranty_access')
+                    <li class="nav-item">
+                        <a href="{{ route("admin.warranties.index") }}" class="nav-link {{ request()->is("admin/warranties") || request()->is("admin/warranties/*") ? "active" : "" }}">
+                            <i class="fa-fw nav-icon fas fa-cogs">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.warranty.title') }}
+                            </p>
+                        </a>
+                    </li>
+                @endcan
                 @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
                     @can('profile_password_edit')
                         <li class="nav-item">

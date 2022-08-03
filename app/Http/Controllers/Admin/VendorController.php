@@ -90,7 +90,7 @@ class VendorController extends Controller
     {
         abort_if(Gate::denies('vendor_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $vendor->load('vendorAddresses', 'vendorContacts', 'vendorBrands');
+        $vendor->load('vendorAddresses', 'vendorContacts', 'vendorNotes', 'vendorPreludeNumbers', 'vendorVendorNumbers', 'vendorWarranties', 'vendorBrands', 'vendorEngines', 'vendorProducts', 'vendorServices');
 
         return view('admin.vendors.show', compact('vendor'));
     }
