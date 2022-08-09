@@ -1,15 +1,10 @@
 <?php
 
 Route::redirect('/', '/login');
-Route::get('/home', function () {
-    if (session('status')) {
-        return redirect()->route('admin.home')->with('status', session('status'));
-    }
 
-    return redirect()->route('admin.home');
-});
 
-Auth::routes(['register' => false]);
+
+Auth::routes(['register' => True]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
@@ -24,6 +19,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Users
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');
+
+    // Vendor Lookup
+    Route::controller(\App\Http\Controllers\Admin\MainfilterController::class)->group(function () {
+        Route::get('mainfilter/index', [\App\Http\Controllers\Admin\MainfilterController::class, 'index'])->name('mainfilter.index');
+        Route::post('mainfilter/getVendors', [\App\Http\Controllers\Admin\MainfilterController::class, 'getVendors'])->name('mainfilter.getVendors');
+    });
+
+
 
     // Audit Logs
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
@@ -53,6 +56,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Address
     Route::delete('addresses/destroy', 'AddressController@massDestroy')->name('addresses.massDestroy');
     Route::resource('addresses', 'AddressController');
+
+
+// Vendor Assign Engine Product Brand Service
+
+    Route::controller(\App\Http\Controllers\Admin\VendorController::class)->group(function () {
+        Route::post('vendors/supdate', [\App\Http\Controllers\Admin\VendorController::class, 'supdate'])->name('vendors.supdate');
+        Route::post('vendors/s/assign/la', [\App\Http\Controllers\Admin\VendorController::class, 'assignsla'])->name('vendors.s.assign.la');
+        Route::post('vendors/s/assign/de', [\App\Http\Controllers\Admin\VendorController::class, 'assignsde'])->name('vendors.s.assign.de');
+
+    });
 
     // Vendor
     Route::delete('vendors/destroy', 'VendorController@massDestroy')->name('vendors.massDestroy');
@@ -112,6 +125,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Assets History
     Route::resource('assets-histories', 'AssetsHistoryController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
+    // Warranty
+    Route::delete('warranties/destroy', 'WarrantyController@massDestroy')->name('warranties.massDestroy');
+    Route::post('warranties/media', 'WarrantyController@storeMedia')->name('warranties.storeMedia');
+    Route::post('warranties/ckmedia', 'WarrantyController@storeCKEditorImages')->name('warranties.storeCKEditorImages');
+    Route::resource('warranties', 'WarrantyController');
+//Vendor Lookup
+   //
+
 
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
 });

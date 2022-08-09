@@ -1,13 +1,22 @@
 @extends('layouts.app')
 @section('content')
-<div class="login-box">
-    <div class="login-logo">
-        <div class="login-logo">
-            <a href="{{ route('admin.home') }}">
-                {{ trans('panel.site_title') }}
+
+    <div class="align-bottom">
+
+
+
+        <div class="login-logo justify-content-center text-center align-bottom " >
+
+            <a href="{{ trans('global.login') }}">
+                <img src="/logo/logo.png" style="margin-top: 7%;"/>
             </a>
+            <div class=".justify-content-center">
+                <img  src="/logo/vendorlookup.png"/>
+            </div>
         </div>
     </div>
+<div class="login-box">
+
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">

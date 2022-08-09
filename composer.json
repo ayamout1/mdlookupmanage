@@ -13,7 +13,9 @@
         "laravel/tinker": "^2.7",
         "yajra/laravel-datatables-oracle": "^9.19",
         "laraveldaily/laravel-charts": "^0.1.29",
-        "spatie/laravel-medialibrary": "^10.0.7"
+        "nuovo/spreadsheet-reader": "^0.5.11",
+        "spatie/laravel-medialibrary": "^10.0.7",
+      "ext-http": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

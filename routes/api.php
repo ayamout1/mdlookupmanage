@@ -34,4 +34,8 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Assets History
     Route::apiResource('assets-histories', 'AssetsHistoryApiController', ['except' => ['store', 'show', 'update', 'destroy']]);
+
+    // Warranty
+    Route::post('warranties/media', 'WarrantyApiController@storeMedia')->name('warranties.storeMedia');
+    Route::apiResource('warranties', 'WarrantyApiController');
 });

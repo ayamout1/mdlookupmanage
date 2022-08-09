@@ -13,6 +13,7 @@ class CreateProductVendorPivotTable extends Migration
             $table->foreign('product_id', 'product_id_fk_7078446')->references('id')->on('products')->onDelete('cascade');
             $table->unsignedBigInteger('vendor_id');
             $table->foreign('vendor_id', 'vendor_id_fk_7078446')->references('id')->on('vendors')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 }

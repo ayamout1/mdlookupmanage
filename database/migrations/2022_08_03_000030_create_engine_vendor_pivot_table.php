@@ -13,6 +13,7 @@ class CreateEngineVendorPivotTable extends Migration
             $table->foreign('engine_id', 'engine_id_fk_7078360')->references('id')->on('engines')->onDelete('cascade');
             $table->unsignedBigInteger('vendor_id');
             $table->foreign('vendor_id', 'vendor_id_fk_7078360')->references('id')->on('vendors')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 }
