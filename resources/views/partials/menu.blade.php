@@ -25,6 +25,16 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route("admin.mainfilter.index") }}" class="nav-link ">
+                        <i class="fa-fw nav-icon fas fa-server">
+
+                        </i>
+                        <p>
+                            Vendor Lookup
+                        </p>
+                    </a>
+                </li>
                 @can('user_management_access')
                     <li class="nav-item has-treeview {{ request()->is("admin/permissions*") ? "menu-open" : "" }} {{ request()->is("admin/roles*") ? "menu-open" : "" }} {{ request()->is("admin/users*") ? "menu-open" : "" }} {{ request()->is("admin/audit-logs*") ? "menu-open" : "" }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
