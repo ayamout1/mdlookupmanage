@@ -43,7 +43,7 @@
 <p>
                                 <a class="popup-form btn btn-primary" href="#addVendor" style="width: 200px;">Add Vendor</a></p></div>
                                 <div class="col-sm">
-                                    <h6>Engine</h6>
+                                    <h6>Engine / Make</h6>
                                         <form action="{{ route('admin.mainfilter.getVendors') }}" method="POST">
                                             <select class="form-control select2" name="engine_id" aria-label="Default select example">
                                                 <option value="0"></option>
