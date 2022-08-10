@@ -31,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label for="file">{{ trans('cruds.note.fields.file') }}</label>
-                <div class="needsclick dropzone {{ $errors->has('file') ? 'is-invalid' : '' }}" id="file-dropzone">
+                <div class="needsclick dropzone {{ $errors->has('file') ? 'is-invalid' : '' }} " id="file-dropzone">
                 </div>
                 @if($errors->has('file'))
                     <span class="text-danger">{{ $errors->first('file') }}</span>

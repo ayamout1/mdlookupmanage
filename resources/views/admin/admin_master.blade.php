@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="MDD Vendorlist dashboard" name="description" />
     <meta content="Abdulrahman Yamout" name="author" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}">
 
@@ -16,7 +17,7 @@
     <link href="{{ asset('backend/') }}/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('backend/') }}/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('backend/') }}/assets/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
     <link href="{{ asset('backend/') }}/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css">
     <!-- Lightbox css -->
     <link href="{{ asset('backend/') }}/assets/libs/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css" />
@@ -183,7 +184,7 @@
 <script src="{{ asset('backend/') }}/assets/js/pages/datatables.init.js"></script>
 
 <script src="{{ asset('backend/') }}/assets/js/app.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
 </body>
 <script>
 
