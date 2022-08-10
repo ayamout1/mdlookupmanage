@@ -181,7 +181,7 @@
                                             @foreach($addresses as $address)
                                             <tr>
                                                 <th scope="row">    <a href="http://maps.google.com/?q={{ $address->address.', '.$address->city.', '.$address->state.', '.$address->zipcode  ?? 'no contact'}}" target="_blank">{{ $address->address.', '.$address->city.', '.$address->state.',  '.$address->zipcode  ?? 'no contact'}}</a></th>
-                                                <form action="{{ route('addresses.destroy',$address->id) }}" method="POST">
+                                                <form action="{{ route('admin.addresses.destroy',$address->id) }}" method="POST">
                                                 <td class="khara d-none">@csrf
                                                     @method('DELETE')
                                                     <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
