@@ -142,7 +142,7 @@
                                 </div>
 
                                 <div class="col-sm">
-                                    <p><button type="submit" class="btn btn-primary">LookUp</button><a class="btn btn-primary" href="{{route('admin.mainfilter.index')}}"> Clear Search</a> </p>
+                                    <p><button type="submit" class="btn btn-primary">LookUp</button>  <a class="btn btn-primary" href="{{route('admin.mainfilter.index')}}"> Clear Search</a> </p>
                                     </div></form>
 
 
@@ -325,7 +325,7 @@
                                                 <td>{{ $cname->name  ?? 'no contact'}}</td>
 
                                                 <td><a href="mailto:{{ $cname->email  ?? 'no contact'}}" onMouseOver="this.style.color='red'" onMouseOut="this.style.color='blue'">{{ $cname->email  ?? 'no contact'}}</a></td>
-                                                <td><a href="{{ $cname->website  ?? 'no contact'}}" target="_blank"onMouseOver="this.style.color='red'" onMouseOut="this.style.color='blue'">{{ $cname->website  ?? 'no contact'}}</a></td>
+                                                <td><a href="http://{{ $cname->website  ?? 'no contact'}}" target="_blank"onMouseOver="this.style.color='red'" onMouseOut="this.style.color='blue'">{{ $cname->website  ?? 'no contact'}}</a></td>
 
                                             @endif
 
