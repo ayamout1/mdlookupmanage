@@ -87,7 +87,7 @@ class AddressController extends Controller
     {
         $address = Address::create($request->all());
 
-        return redirect()->route('admin.addresses.index');
+        return back();
     }
 
     public function edit(Address $address)

@@ -74,7 +74,7 @@ class PreludeNumberController extends Controller
     {
         $preludeNumber = PreludeNumber::create($request->all());
 
-        return redirect()->route('admin.prelude-numbers.index');
+        return back();
     }
 
     public function edit(PreludeNumber $preludeNumber)

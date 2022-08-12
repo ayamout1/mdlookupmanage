@@ -223,9 +223,9 @@
                                                 <tr>
                                                 <td>{{$note->note}}</td>
                                                     <td>
-                                                        @foreach($note->file as $key => $media)
-                                                            <a href="{{ $media->getUrl() }}" target="_blank">
-                                                                {{ trans('global.view_file') }}
+                                                        @foreach($note->media as $mediafile)
+                                                            <a href="{{ $mediafile->getUrl() }}" target="_blank">
+                                                                Download Note
                                                             </a>
                                                         @endforeach
                                                     </td>
@@ -253,6 +253,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Warranty</th>
+                                                <th>File</th>
                                                 <th class="khara d-none" >Delete</th>
 
                                             </tr>
@@ -263,6 +264,12 @@
                                         @foreach($warranties as $warranty)
                                             <tr>
                                               <td>{{$warranty->warranty}}</td>
+                                                <td>
+                                                @foreach($warranty->media as $mediafile)
+                                                <a href="{{ $mediafile->getUrl() }}" target="_blank">
+                                                    Download Warranty
+                                                </a>
+                                                    @endforeach</td>
                                               <form action="{{ route('admin.warranties.destroy',$warranty->id) }}" method="POST">
                                                   <td class="khara d-none">@csrf
                                                       @method('DELETE')
@@ -944,41 +951,38 @@
 
             </form></div></div>
     <div class="card mfp-hide mfp-popup-form mx-auto" id="notes-form">
+
+
         <div class="card-body">
-
-            <form action="{{ route('admin.notes.store') }}" method="POST" enctype="multipart/form-data"  class="was-validated">
+            <form method="POST" action="{{ route("admin.notes.store") }}" enctype="multipart/form-data">
                 @csrf
-
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <strong>Notes:</strong>
-                            <input type="text" name="note" class="form-control" placeholder="notes" required>
-
-                            <div class="form-group">
-                                <label for="file">{{ trans('cruds.note.fields.file') }}</label>
-                                <div class="needsclick dropzone {{ $errors->has('file') ? 'is-invalid' : '' }} dz-clickable" id="file-dropzone">
-                                </div>
-                                @if($errors->has('file'))
-                                    <span class="text-danger">{{ $errors->first('file') }}</span>
-                                @endif
-                                <span class="help-block">{{ trans('cruds.note.fields.file_helper') }}</span>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
-                    <input type="hidden" name="vendor_page" value="1">
-
-                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+                <div class="form-group">
+                    <label for="note">{{ trans('cruds.note.fields.note') }}</label>
+                    <input class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}" type="text" name="note" id="note" value="{{ old('note', '') }}">
+                    @if($errors->has('note'))
+                        <span class="text-danger">{{ $errors->first('note') }}</span>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.note.fields.note_helper') }}</span>
                 </div>
+                <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
+                <div class="form-group">
+                    <label for="file">{{ trans('cruds.note.fields.file') }}</label>
+                    <div class="needsclick dropzone {{ $errors->has('file') ? 'is-invalid' : '' }} " id="file-dropzone">
+                    </div>
+                    @if($errors->has('file'))
+                        <span class="text-danger">{{ $errors->first('file') }}</span>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.note.fields.file_helper') }}</span>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-danger" type="submit">
+                        {{ trans('global.save') }}
+                    </button>
+                </div>
+            </form>
+        </div></div>
 
-            </form></div></div>
-
-
+    @section('scripts')
     <script>
         function hiddenbutton() {
 
@@ -1001,17 +1005,11 @@
 
         }
 
-
-    </script>
-@endsection
-
-@section('scripts')
-    <script>
-
+            // access Dropzone here
         var uploadedFileMap = {}
         Dropzone.options.fileDropzone = {
             url: '{{ route('admin.notes.storeMedia') }}',
-            maxFilesize: 2, // MB
+            maxFilesize: 20, // MB
             addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1033,18 +1031,7 @@
                 }
                 $('form').find('input[name="file[]"][value="' + name + '"]').remove()
             },
-            init: function () {
-                @if(isset($note) && $note->file)
-                var files =
-                    {!! json_encode($note->file) !!}
-                    for (var i in files) {
-                    var file = files[i]
-                    this.options.addedfile.call(this, file)
-                    file.previewElement.classList.add('dz-complete')
-                    $('form').append('<input type="hidden" name="file[]" value="' + file.file_name + '">')
-                }
-                @endif
-            },
+
             error: function (file, response) {
                 if ($.type(response) === 'string') {
                     var message = response //dropzone sends it's own error messages in string
@@ -1062,6 +1049,11 @@
                 return _results
             }
         }
+
+
+
     </script>
 @endsection
+@endsection
+
 

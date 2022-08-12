@@ -95,7 +95,7 @@ class ContactController extends Controller
     {
         $contact = Contact::create($request->all());
 
-        return redirect()->route('admin.contacts.index');
+        return back();
     }
 
     public function edit(Contact $contact)

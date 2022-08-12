@@ -98,7 +98,7 @@ class NoteController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $note->id]);
         }
 
-        return redirect()->route('admin.notes.index');
+        return back();
     }
 
     public function edit(Note $note)

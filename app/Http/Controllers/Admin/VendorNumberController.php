@@ -74,7 +74,7 @@ class VendorNumberController extends Controller
     {
         $vendorNumber = VendorNumber::create($request->all());
 
-        return redirect()->route('admin.vendor-numbers.index');
+        return back();
     }
 
     public function edit(VendorNumber $vendorNumber)
