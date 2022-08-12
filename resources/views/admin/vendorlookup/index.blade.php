@@ -142,7 +142,7 @@
                                 </div>
 
                                 <div class="col-sm">
-                                    <p><a class="btn btn-primary" href="{{route('admin.mainfilter.index')}}"> Clear Search</a> <button type="submit" class="btn btn-primary">LookUp</button></p>
+                                    <p><button type="submit" class="btn btn-primary">LookUp</button><a class="btn btn-primary" href="{{route('admin.mainfilter.index')}}"> Clear Search</a> </p>
                                     </div></form>
 
 
@@ -282,7 +282,7 @@
 
                 <div class="card">
                     <div class="card-body" >
-                        <h1>Vendor Search</h1>
+                        <h1 style="margin-left:85%">Vendor Search</h1>
                         <div class="table-responsive" >
                         <table id="table" class="table table-striped table-bordered nowrap display">
                                 <thead>
