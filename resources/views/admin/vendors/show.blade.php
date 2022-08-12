@@ -204,7 +204,7 @@
 
                                             <thead>
                                             <tr>
-                                                <th>Note</th>
+                                                <th>Title</th>
                                                 <th>
                                                     {{ trans('cruds.note.fields.file') }}
                                                 </th>
@@ -220,7 +220,7 @@
                                                     <td>
                                                         @foreach($note->media as $mediafile)
                                                             <a href="{{ $mediafile->getUrl() }}" target="_blank">
-                                                                Download Note
+                                                                Download
                                                             </a>
                                                         @endforeach
                                                     </td>
@@ -237,7 +237,7 @@
                                         @endforeach
                                         </tbody>
                                         </table>
-                                     <p class="khara d-none"><a class="popup-form btn btn-primary" href="#notes-form">Add Notes</a></p>
+                                     <p class="khara d-none"><a class="popup-form btn btn-primary" href="#notes-form">Add Attachment</a></p>
                                 </div>
                                 </div>
 
@@ -910,7 +910,7 @@
             <form method="POST" action="{{ route("admin.notes.store") }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label for="note">{{ trans('cruds.note.fields.note') }}</label>
+                    <label for="note">Title</label>
                     <input class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}" type="text" name="note" id="note" value="{{ old('note', '') }}">
                     @if($errors->has('note'))
                         <span class="text-danger">{{ $errors->first('note') }}</span>
