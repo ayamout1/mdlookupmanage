@@ -100,15 +100,10 @@
                                 <li class="nav-item">
                                     <a class="nav-link" data-bs-toggle="tab" href="#notes" role="tab">
                                         <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                        <span class="d-none d-sm-block">Notes</span>
+                                        <span class="d-none d-sm-block">PDF's</span>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#warranty" role="tab">
-                                        <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                        <span class="d-none d-sm-block">Warranty</span>
-                                    </a>
-                                </li>
+
                                 <li class="nav-item">
                                     <a class="nav-link" data-bs-toggle="tab" href="#preludenumber" role="tab">
                                         <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
@@ -244,48 +239,6 @@
                                         </table>
                                      <p class="khara d-none"><a class="popup-form btn btn-primary" href="#notes-form">Add Notes</a></p>
                                 </div>
-                                </div>
-                                <div class="tab-pane" id="warranty" role="tabpanel">
-
-                                    <div class="table-responsive">
-                                        <table class="table table-striped mb-0">
-
-                                            <thead>
-                                            <tr>
-                                                <th>Warranty</th>
-                                                <th>File</th>
-                                                <th class="khara d-none" >Delete</th>
-
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-
-
-                                        @foreach($warranties as $warranty)
-                                            <tr>
-                                              <td>{{$warranty->warranty}}</td>
-                                                <td>
-                                                @foreach($warranty->media as $mediafile)
-                                                <a href="{{ $mediafile->getUrl() }}" target="_blank">
-                                                    Download Warranty
-                                                </a>
-                                                    @endforeach</td>
-                                              <form action="{{ route('admin.warranties.destroy',$warranty->id) }}" method="POST">
-                                                  <td class="khara d-none">@csrf
-                                                      @method('DELETE')
-                                                      <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
-                                                      <input type="hidden" name="vendor_page" value="1">
-                                                      <button type="submit" class="btn btn-danger">Delete</button>
-                                                  </td></form>
-                                                </tr>
-                                        @endforeach
-
-
-                                            </tbody>
-
-                                        </table>
-                                     <p class="khara d-none">   <a class="popup-form btn btn-primary" href="#warranty-form">Add Warranty Information</a></p>
-                                    </div>
                                 </div>
 
                                 <div class="tab-pane" id="preludenumber" role="tabpanel">
