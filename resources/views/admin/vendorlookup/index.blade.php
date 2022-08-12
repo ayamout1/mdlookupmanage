@@ -57,14 +57,14 @@
                                     <select class="form-control select2"  name="major_group" >
 
                                         <option value="0" style="display: none; !important"></option>
-                                        @foreach($pdatas as $pdata)
+                                        
                                             <option value="1">Engine Parts</option>
                                             <option value="2">Turbo Chargers</option>
                                             <option value="3">Fuel Injection</option>
                                             <option value="4">Filtration</option>
                                             <option value="5">Services</option>
                                             <option value="6">Miscellaneous</option>
-                                        @endforeach
+
                                     </select>
                                 </div>
                                 <style>
