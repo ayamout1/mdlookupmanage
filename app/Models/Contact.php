@@ -19,6 +19,7 @@ class Contact extends Model
     public static $searchable = [
         'name',
         'website',
+        'phone',
         'email',
         'address',
         'city',
@@ -36,6 +37,7 @@ class Contact extends Model
         'website',
         'email',
         'phone',
+        'extension',
         'address',
         'city',
         'state',

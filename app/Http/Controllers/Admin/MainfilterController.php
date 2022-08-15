@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class MainfilterController extends Controller
 {
-    //
+    //s
     public function index()
     {
         $vendors = Vendor::all();

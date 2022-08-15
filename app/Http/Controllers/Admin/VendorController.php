@@ -80,7 +80,7 @@ class VendorController extends Controller
     {
         $vendor = Vendor::create($request->all());
 
-        return redirect()->route('admin.vendors.index');
+        return back();
     }
 
     public function edit(Vendor $vendor)
@@ -94,7 +94,7 @@ class VendorController extends Controller
     {
         $vendor->update($request->all());
 
-        return redirect()->route('admin.vendors.index');
+        return back();
     }
 
     public function show(Vendor $vendor)

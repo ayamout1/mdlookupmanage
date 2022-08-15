@@ -45,6 +45,10 @@ class StoreContactRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'extension' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

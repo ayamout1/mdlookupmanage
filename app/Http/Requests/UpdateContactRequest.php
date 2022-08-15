@@ -45,6 +45,10 @@ class UpdateContactRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'extension' => [
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

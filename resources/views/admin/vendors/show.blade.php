@@ -103,6 +103,18 @@
                                         <span class="d-none d-sm-block">PDF's</span>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#note" role="tab">
+                                        <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                        <span class="d-none d-sm-block">Notes</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#warranty" role="tab">
+                                        <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                        <span class="d-none d-sm-block">Warranty</span>
+                                    </a>
+                                </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" data-bs-toggle="tab" href="#preludenumber" role="tab">
@@ -240,7 +252,80 @@
                                      <p class="khara d-none"><a class="popup-form btn btn-primary" href="#notes-form">Add Attachment</a></p>
                                 </div>
                                 </div>
+                                <div class="tab-pane" id="note" role="tabpanel">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped mb-0">
 
+                                            <thead>
+                                            <tr>
+                                                <th>Notes</th>
+                                                <th class="khara d-none">Delete</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+
+
+                                            @foreach($notes as $note)
+                                                <tr>
+                                                    <td>
+                                                        {{$note->note}}
+                                                    </td>
+                                                    <form action="{{ route('admin.notes.destroy',$note->id) }}" method="POST">
+                                                        <td class="khara d-none">@csrf
+                                                            @method('DELETE')
+                                                            <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
+                                                            <input type="hidden" name="vendor_page" value="1">
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </td></form>
+                                                </tr>
+                                            @endforeach
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <p class="khara d-none">  <a class="popup-form btn btn-primary" href="#addnote">Add Note</a></p>
+
+                                </div>
+                                <div class="tab-pane" id="warranty" role="tabpanel">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped mb-0">
+
+                                            <thead>
+                                            <tr>
+                                                <th>Prelude</th>
+                                                <th class="khara d-none">Delete</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+
+
+                                            @foreach($warranties as $warranty)
+                                                <tr>
+                                                    <td>
+                                                        {{$warranty->warranty}}
+                                                    </td>
+                                                    <form action="{{ route('admin.warranties.destroy',$warranty->id) }}" method="POST">
+                                                        <td class="khara d-none">@csrf
+                                                            @method('DELETE')
+                                                            <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
+                                                            <input type="hidden" name="vendor_page" value="1">
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </td></form>
+                                                </tr>
+                                            @endforeach
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <p class="khara d-none">  <a class="popup-form btn btn-primary" href="#warranty-form">Add Warranty info</a></p>
+
+                                </div>
                                 <div class="tab-pane" id="preludenumber" role="tabpanel">
                                     <div class="table-responsive">
                                         <table class="table table-striped mb-0">
@@ -927,6 +1012,29 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.note.fields.file_helper') }}</span>
                 </div>
+                <div class="form-group">
+                    <button class="btn btn-danger" type="submit">
+                        {{ trans('global.save') }}
+                    </button>
+                </div>
+            </form>
+        </div></div>
+    <div class="card mfp-hide mfp-popup-form mx-auto" id="addnote">
+
+
+        <div class="card-body">
+            <form method="POST" action="{{ route("admin.notes.store") }}" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <label for="note">Title</label>
+                    <input class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}" type="text" name="note" id="note" value="{{ old('note', '') }}">
+                    @if($errors->has('note'))
+                        <span class="text-danger">{{ $errors->first('note') }}</span>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.note.fields.note_helper') }}</span>
+                </div>
+                <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
+
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit">
                         {{ trans('global.save') }}

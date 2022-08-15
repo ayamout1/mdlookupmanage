@@ -33,12 +33,12 @@ class ContactController extends Controller
                 $crudRoutePart = 'contacts';
 
                 return view('partials.datatablesActions', compact(
-                'viewGate',
-                'editGate',
-                'deleteGate',
-                'crudRoutePart',
-                'row'
-            ));
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
             });
 
             $table->editColumn('id', function ($row) {
@@ -70,6 +70,10 @@ class ContactController extends Controller
             });
             $table->addColumn('vendor_name', function ($row) {
                 return $row->vendor ? $row->vendor->name : '';
+            });
+
+            $table->editColumn('extension', function ($row) {
+                return $row->extension ? $row->extension : '';
             });
 
             $table->rawColumns(['actions', 'placeholder', 'vendor']);

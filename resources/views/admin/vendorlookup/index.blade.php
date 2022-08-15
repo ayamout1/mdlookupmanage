@@ -57,7 +57,7 @@
                                     <select class="form-control select2"  name="major_group" >
 
                                         <option value="0" style="display: none; !important"></option>
-                                        
+
                                             <option value="1">Engine Parts</option>
                                             <option value="2">Turbo Chargers</option>
                                             <option value="3">Fuel Injection</option>
@@ -236,6 +236,13 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
+                                        <strong>Extension:</strong>
+                                        <input type="text" name="extension" class="form-control" placeholder="Extension">
+                                        <div class="valid-feedback">Looks good!</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
                                         <strong>Address:</strong>
                                         <input type="text" name="address" class="form-control" placeholder="address">
                                     </div>
@@ -290,6 +297,7 @@
                                     <th>Ranking</th>
                                     <th>Vendor (Click Vendor for details)</th>
                                     <th>Phone</th>
+                                    <th>Extension</th>
                                     <th>Contact</th>
                                     <th>Email</th>
                                     <th>Website</th>
@@ -306,7 +314,7 @@
 
                                     @foreach($vendors as $ven)
                                         @foreach($ven->vendorContacts as $cname)
-                                            @if ($loop->first)
+
                                                 @if($ven->ranking == 1)
                                                     <td><span style="display: none">{{$ven->ranking}}</span>Preferred</td>
                                                 @elseif($ven->ranking == 2)
@@ -321,12 +329,16 @@
 
 
                                                 <td><a href="tel:{{ $cname->phone  ?? 'no contact'}}"onMouseOver="this.style.color='red'" onMouseOut="this.style.color='blue'">{{ $cname->phone  ?? 'no contact'}}</a></td>
+                                                <td>{{$cname->extension}}</td>
 
                                                 <td>{{ $cname->name  ?? 'no contact'}}</td>
 
                                                 <td><a href="mailto:{{ $cname->email  ?? 'no contact'}}" onMouseOver="this.style.color='red'" onMouseOut="this.style.color='blue'">{{ $cname->email  ?? 'no contact'}}</a></td>
-                                                <td><a href="http://{{ $cname->website  ?? 'no contact'}}" target="_blank"onMouseOver="this.style.color='red'" onMouseOut="this.style.color='blue'">{{ $cname->website  ?? 'no contact'}}</a></td>
 
+                                                @if (str_contains($cname->website,'http' ))
+                                                    <td><a href="{{$cname->website  ?? 'no contact'}}" target="_blank"onMouseOver="this.style.color='red'" onMouseOut="this.style.color='blue'">{{ $cname->website  ?? 'no contact'}}</a></td>
+@else
+                                                        <td><a href="http://{{$cname->website  ?? 'no contact'}}" target="_blank"onMouseOver="this.style.color='red'" onMouseOut="this.style.color='blue'">{{ $cname->website  ?? 'no contact'}}</a></td>
                                             @endif
 
 

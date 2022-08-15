@@ -218,9 +218,11 @@
                                                                         <td><a href="tel:{{ $cname->phone  ?? 'no contact'}}">{{ $cname->phone  ?? 'no contact'}}</a></td>
                                                                 <td><a href="mailto:{{ $cname->email  ?? 'no contact'}}">{{ $cname->email  ?? 'no contact'}}</a></td>
 
-                                                                        <td><a href="{{ $cname->website  ?? 'no contact'}}" target="_blank">{{ $cname->website  ?? 'no contact'}}</a></td>
-
-
+                                                                        @if (str_contains($cname->website,'http' ))
+                                                                            <td><a href="{{$cname->website  ?? 'no contact'}}" target="_blank"onMouseOver="this.style.color='red'" onMouseOut="this.style.color='blue'">{{ $cname->website  ?? 'no contact'}}</a></td>
+                                                                        @else
+                                                                            <td><a href="http://{{$cname->website  ?? 'no contact'}}" target="_blank"onMouseOver="this.style.color='red'" onMouseOut="this.style.color='blue'">{{ $cname->website  ?? 'no contact'}}</a></td>
+                                                                        @endif
 
 
 
