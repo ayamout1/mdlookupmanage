@@ -77,11 +77,41 @@ class VendorController extends Controller
     }
 
     public function store(StoreVendorRequest $request)
-    {
-        $vendor = Vendor::create($request->all());
+          {
+              $request->validate([
+                  'name' => 'required',
+              ]);
 
-        return back();
-    }
+
+
+              $vid = Vendor::create(['name'=>$request->Vname,
+                  'ranking'=>$request->ranking
+              ]);
+
+              $lastid = $vid->id;
+
+              Contact::create(['name'=>$request->name,
+                  'website'=>$request->website,
+                  'email'=>$request->email,
+                  'phone'=>$request->phone,
+                  'extension'=>$request->extension,
+                  'address'=>$request->address,
+                  'city'=>$request->city,
+                  'state'=>$request->state,
+                  'zip'=>$request->zip,
+                  'vendor_id'=>$lastid
+              ]);
+
+
+              if ($request->mpage = 1){
+                  return redirect()->route('admin.vendors.show',$lastid)
+                      ->with('success','Vendor Created Successfully/ Must Create Contact');}
+
+              return redirect()->route('admin.vendors.index')
+                  ->with('success','Vendor created successfully.');
+          }
+
+
 
     public function edit(Vendor $vendor)
     {
