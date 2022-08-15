@@ -37,6 +37,9 @@
                         {{ trans('cruds.contact.fields.phone') }}
                     </th>
                     <th>
+                        {{ trans('cruds.contact.fields.extension') }}
+                    </th
+                    <th>
                         {{ trans('cruds.contact.fields.address') }}
                     </th>
                     <th>
@@ -51,9 +54,7 @@
                     <th>
                         {{ trans('cruds.contact.fields.vendor') }}
                     </th>
-                    <th>
-                        {{ trans('cruds.contact.fields.extension') }}
-                    </th>
+>
                     <th>
                         &nbsp;
                     </th>
