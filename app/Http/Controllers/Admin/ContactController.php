@@ -92,7 +92,7 @@ class ContactController extends Controller
 
         $vendors = Vendor::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.contacts.create', compact('vendors'));
+        return back();
     }
 
     public function store(StoreContactRequest $request)
@@ -110,14 +110,14 @@ class ContactController extends Controller
 
         $contact->load('vendor');
 
-        return view('admin.contacts.edit', compact('contact', 'vendors'));
+        return back();
     }
 
     public function update(UpdateContactRequest $request, Contact $contact)
     {
         $contact->update($request->all());
 
-        return redirect()->route('admin.contacts.index');
+        return back();
     }
 
     public function show(Contact $contact)

@@ -142,6 +142,7 @@
                                             <tr>
                                                 <th>Contact Name</th>
                                                 <th>Phone</th>
+                                                <th>Ext</th>
                                                 <th>Email</th>
 {{--                                                <th>Website</th>--}}
                                                 <th class="khara d-none">Edit Contact</th>
@@ -153,6 +154,7 @@
                                                 <tr>
                                                     <th scope="row">{{ $cdata->name  ?? 'no contact'}}</th>
                                                     <td><a href="tel{{ $cdata->phone  ?? 'no contact'}}">{{ $cdata->phone  ?? 'no contact'}}</a></td>
+                                                    <td>{{ $cdata->extension  ?? 'no contact'}}</td>
                                                     <td><a href="mailto: {{ $cdata->email}} ">{{ $cdata->email  ?? 'no email on file'}}</a></td>
 {{--                                                    <td><a href="{{ $cdata->website}}">{{ $cdata->website ?? 'no website on file'}}</a></td>--}}
                                                     <form action="{{ route('admin.contacts.destroy',$cdata->id) }}" method="POST">
@@ -804,6 +806,13 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
+                                <strong>Extension:</strong>
+                                <input type="text" name="extension" class="form-control" placeholder="Extension">
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
                                 <strong>Address:</strong>
                                 <input type="text" name="address" class="form-control" placeholder="address">
                             </div>
@@ -876,7 +885,13 @@
                                     <div class="valid-feedback">Looks good!</div>
                                 </div>
                             </div>
-
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Extension:</strong>
+                                    <input type="text" name="extension" value="{{ $cdata->extension }}" class="form-control" placeholder="Extension">
+                                    <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>Address:</strong>
