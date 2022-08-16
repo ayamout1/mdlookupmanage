@@ -17,7 +17,7 @@ class MainfilterController extends Controller
     //s
     public function index()
     {
-        $vendors = Vendor::all();
+        $vendors = Vendor::orderby('name','ASC')->get();
         $pdatas = Product::all();
         $cdatas = Contact::all();
         $bdatas = Brand::all();
@@ -44,7 +44,7 @@ class MainfilterController extends Controller
 
     public function show()
     {
-        $vendors = Vendor::all();
+        $vendors = Vendor::orderby('name','ASC')->get();
         $pdatas = Product::all();
         $cdatas = Contact::all();
         $bdatas = Brand::all();
@@ -99,7 +99,7 @@ class MainfilterController extends Controller
             $vendors = Vendor::with('vendorProducts')
                 ->whereHas('vendorProducts',function (Builder $q) use ($request) {
                     $q->where('id','=',$request->product_misc_id);
-                })->get();
+                })->orderby('name','ASC')->get();
             $s12 = "16";
 
         }else
@@ -108,7 +108,7 @@ class MainfilterController extends Controller
           $vendors = Vendor::with('vendorProducts')
               ->whereHas('vendorProducts',function (Builder $q) use ($request) {
                   $q->where('major_group','=',$request->major_group);
-              })->get();
+              })->orderby('name','ASC')->get();
           $s12 = "15";
 
       }else
@@ -127,7 +127,7 @@ class MainfilterController extends Controller
                 })
                 ->whereHas('vendorEngines', function (Builder $q) use ($request) {
                     $q->where('id', '=', $request->engine_id);
-                })->get();
+                })->orderby('name','ASC')->get();
             $s12 = "1";
 
             //            return '1productid '.$request->product_id.' serviceid '.$request->service_id.' brandid '.$request->brand_id.' engineid '.$request->engine_id;
@@ -141,7 +141,7 @@ class MainfilterController extends Controller
                 ->whereHas('vendorBrands', function (Builder $q) use ($request) {
                     $q->where('id', '=', $request->brand_id);
 
-                })->get();
+                })->orderby('name','ASC')->get();
             $s12 = "2";
 
             //            return '2productid '.$request->product_id.' serviceid '.$request->service_id.' brandid '.$request->brand_id.' engineid '.$request->engine_id;
@@ -154,7 +154,7 @@ class MainfilterController extends Controller
                 })
                 ->whereHas('vendorEngines', function (Builder $q) use ($request) {
                     $q->where('id', '=', $request->engine_id);
-                })->get();
+                })->orderby('name','ASC')->get();
             $s12 = "3";
 
 //            return '3productid '.$request->product_id.' serviceid '.$request->service_id.' brandid '.$request->brand_id.' engineid '.$request->engine_id;
@@ -167,7 +167,7 @@ class MainfilterController extends Controller
                 })
                 ->whereHas('vendorEngines', function (Builder $q) use ($request) {
                     $q->where('id', '=', $request->engine_id);
-                })->get();
+                })->orderby('name','ASC')->get();
             $s12 = "4";
 
 //            return '4productid '.$request->product_id.' serviceid '.$request->service_id.' brandid '.$request->brand_id.' engineid '.$request->engine_id;
@@ -180,7 +180,7 @@ class MainfilterController extends Controller
                 })
                 ->whereHas('vendorBrands', function (Builder $q) use ($request) {
                     $q->where('id', '=', $request->brand_id);
-                })->get();
+                })->orderby('name','ASC')->get();
 //            return '5productid '.$request->product_id.' serviceid '.$request->service_id.' brandid '.$request->brand_id.' engineid '.$request->engine_id;
             $s12 = "5";
 
@@ -193,7 +193,7 @@ class MainfilterController extends Controller
                 })
                 ->whereHas('vendorEngines', function (Builder $q) use ($request) {
                     $q->where('id', '=', $request->engine_id);
-                })->get();
+                })->orderby('name','ASC')->get();
             $s12 = "6";
 
 //            return '6productid '.$request->product_id.' serviceid '.$request->service_id.' brandid '.$request->brand_id.' engineid '.$request->engine_id;
@@ -209,7 +209,7 @@ class MainfilterController extends Controller
                 })
                 ->whereHas('vendorBrands', function (Builder $q) use ($request) {
                     $q->where('id', '=', $request->brand_id);
-                })->get();
+                })->orderby('name','ASC')->get();
 //            return '7productid '.$request->product_id.' serviceid '.$request->service_id.' brandid '.$request->brand_id.' engineid '.$request->engine_id;
             $s12 = "7";
 
@@ -222,7 +222,7 @@ class MainfilterController extends Controller
                 })
                 ->whereHas('vendorServices', function (Builder $q) use ($request) {
                     $q->where('id', '=', $request->service_id);
-                })->get();
+                })->orderby('name','ASC')->get();
 //            return '8productid '.$request->product_id.' serviceid '.$request->service_id.' brandid '.$request->brand_id.' engineid '.$request->engine_id;
             $s12 = "8";
 
@@ -232,7 +232,7 @@ class MainfilterController extends Controller
             $vendors = Vendor::with('vendorProducts', 'vendorServices', 'vendorBrands', 'vendorEngines', 'vendorContacts')
                 ->whereHas('vendorProducts', function (Builder $q) use ($request) {
                     $q->where('id', '=', $request->product_id);
-                })->get();
+                })->orderby('name','ASC')->get();
             $s12 = "9";
 
 //            return '9productid '.$request->product_id.' serviceid '.$request->service_id.' brandid '.$request->brand_id.' engineid '.$request->engine_id;
@@ -242,7 +242,7 @@ class MainfilterController extends Controller
             $vendors = Vendor::with('vendorProducts', 'vendorServices', 'vendorBrands', 'vendorEngines', 'vendorContacts')
                 ->whereHas('vendorServices', function (Builder $q) use ($request) {
                     $q->where('id', '=', $request->service_id);
-                })->get();
+                })->orderby('name','ASC')->get();
             $s12 = "10";
 
 //            return '10productid '.$request->product_id.' serviceid '.$request->service_id.' brandid '.$request->brand_id.' engineid '.$request->engine_id;
@@ -252,7 +252,7 @@ class MainfilterController extends Controller
             $vendors = Vendor::with('vendorProducts', 'vendorServices', 'vendorBrands', 'vendorEngines', 'vendorContacts')
                 ->whereHas('vendorBrands', function (Builder $q) use ($request) {
                     $q->where('id', '=', $request->brand_id);
-                })->get();
+                })->orderby('name','ASC')->get();
             $s12 = "11";
 
 //            return '11productid '.$request->product_id.' serviceid '.$request->service_id.' brandid '.$request->brand_id.' engineid '.$request->engine_id;
@@ -262,7 +262,7 @@ class MainfilterController extends Controller
             $vendors = Vendor::with('vendorProducts', 'vendorServices', 'vendorBrands', 'vendorEngines', 'vendorContacts')
                 ->whereHas('vendorEngines', function (Builder $q) use ($request) {
                     $q->where('id', '=', $request->engine_id);
-                })->get();
+                })->orderby('name','ASC')->get();
             $s12 = "12";
 
             //            return '12productid '.$request->product_id.' serviceid '.$request->service_id.' brandid '.$request->brand_id.' engineid '.$request->engine_id;
@@ -283,7 +283,7 @@ class MainfilterController extends Controller
 
                 ->orWhereHas('vendorEngines', function (Builder  $q) use($request) {
                     $q->where('id', '=', $request->engine_id);
-                })->get();
+                })->orderby('name','ASC')->get();
 //        return '13productid '.$request->product_id.' serviceid '.$request->service_id.' brandid '.$request->brand_id.' engineid '.$request->engine_id;
 
 $s12 = " Search Parameters Not set";}
