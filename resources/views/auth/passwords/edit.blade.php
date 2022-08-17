@@ -1,6 +1,6 @@
-@extends('layouts.admin')
-@section('content')
+@extends('admin.admin_master')
 
+<br />
 <div class="row">
     <div class="col-md-6">
         <div class="card">
@@ -88,4 +88,4 @@
     </div>
 
 </div>
-@endsection
+

@@ -35,7 +35,7 @@
 
 
             <div class="mt-3">
-                <h4 class="font-size-16 mb-2"style="color:white;">{{ Auth::user()->email }}</h4>
+                <h4 class="font-size-16 mb-2"style="color:white;"><a href="{{ route('profile.password.edit') }}">{{ Auth::user()->email }}</a></h4>
                 <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>

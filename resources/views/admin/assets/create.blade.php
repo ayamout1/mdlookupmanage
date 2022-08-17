@@ -108,7 +108,7 @@
     var uploadedPhotosMap = {}
 Dropzone.options.photosDropzone = {
     url: '{{ route('admin.assets.storeMedia') }}',
-    maxFilesize: 2, // MB
+    maxFilesize: 50, // MB
     addRemoveLinks: true,
     headers: {
       'X-CSRF-TOKEN': "{{ csrf_token() }}"
