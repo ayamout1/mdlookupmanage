@@ -1042,7 +1042,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="note">Note</label>
-                    <input class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}" type="text" name="title" id="note" value="{{ old('note', '') }}">
+                    <input class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}" type="text" name="title" id="note" value="{{ old('title', '') }}">
                     @if($errors->has('note'))
                         <span class="text-danger">{{ $errors->first('note') }}</span>
                     @endif

@@ -19,7 +19,7 @@ class StorePreludeNumberRequest extends FormRequest
         return [
             'number' => [
                 'nullable',
-                'integer',
+                'string',
                 'min:-2147483648',
                 'max:2147483647',
             ],
