@@ -53,7 +53,12 @@
                                             @foreach($cdatas as $cdata)
                                             @if(isset($cdata->website))
 
-                                                    <li><a href="{{ $cdata->website}}" target="_blank">{{$cdata->website }}</a></li>
+
+                                                        @if (str_contains($cdata->website,'http' ))
+                                                            <td><a href="{{$cdata->website}}" target="_blank">{{ $cdata->website}}</a></td>
+                                                        @else
+                                                            <td><a href="http://{{$cdata->website}}" target="_blank">{{ $cdata->website}}</a></td>
+                                                        @endif
                                             @endif
                                             @endforeach
 
