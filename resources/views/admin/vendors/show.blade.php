@@ -349,7 +349,7 @@
                                                     {{$preludenumber->number}}
                                                 </td>
                                                     <form action="{{ route('admin.prelude-numbers.destroy',$preludenumber->id) }}" method="POST">
-                                                        <td>@csrf
+                                                        <td class="khara d-none">@csrf
                                                             @method('DELETE')
                                                             <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
                                                             <input type="hidden" name="vendor_page" value="1">
