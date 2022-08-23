@@ -10,8 +10,16 @@
         <form method="POST" action="{{ route("admin.notes.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="note">{{ trans('cruds.note.fields.note') }}</label>
+                <label for="note">Title</label>
                 <input class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}" type="text" name="note" id="note" value="{{ old('note', '') }}">
+                @if($errors->has('note'))
+                    <span class="text-danger">{{ $errors->first('note') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.note.fields.note_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="note">Note</label>
+                <input class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}" type="text" name="title" id="note" value="{{ old('title', '') }}">
                 @if($errors->has('note'))
                     <span class="text-danger">{{ $errors->first('note') }}</span>
                 @endif

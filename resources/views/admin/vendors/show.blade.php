@@ -228,17 +228,17 @@
                                             </tr>
                                             </thead>
                                         <tbody>
-                                        @foreach($notes as $note)
+                                        @foreach($pdfs as $pdf)
                                                 <tr>
-                                                <td>{{$note->note}}</td>
+                                                <td>{{$pdf->note}}</td>
                                                     <td>
-                                                        @foreach($note->media as $mediafile)
+                                                        @foreach($pdf->media as $mediafile)
                                                             <a href="{{ $mediafile->getUrl() }}" target="_blank">
                                                                 Download
                                                             </a>
                                                         @endforeach
                                                     </td>
-                                                    <form action="{{ route('admin.notes.destroy',$note->id) }}" method="POST">
+                                                    <form action="{{ route('admin.notes.destroy',$pdf->id) }}" method="POST">
 
                                                         <td class="khara d-none">@csrf
                                                             @method('DELETE')
@@ -272,7 +272,7 @@
                                             @foreach($notes as $note)
                                                 <tr>
                                                     <td>
-                                                        {{$note->note}}
+                                                        {{$note->title}}
                                                     </td>
                                                     <form action="{{ route('admin.notes.destroy',$note->id) }}" method="POST">
                                                         <td class="khara d-none">@csrf
@@ -297,7 +297,7 @@
 
                                             <thead>
                                             <tr>
-                                                <th>Prelude</th>
+                                                <th>Warranty Info</th>
                                                 <th class="khara d-none">Delete</th>
 
                                             </tr>
@@ -1041,8 +1041,8 @@
             <form method="POST" action="{{ route("admin.notes.store") }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label for="note">Title</label>
-                    <input class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}" type="text" name="note" id="note" value="{{ old('note', '') }}">
+                    <label for="note">Note</label>
+                    <input class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}" type="text" name="title" id="note" value="{{ old('note', '') }}">
                     @if($errors->has('note'))
                         <span class="text-danger">{{ $errors->first('note') }}</span>
                     @endif

@@ -37,6 +37,7 @@ class Note extends Model implements HasMedia
 
     protected $fillable = [
         'note',
+        'title',
         'vendor_id',
         'created_at',
         'updated_at',

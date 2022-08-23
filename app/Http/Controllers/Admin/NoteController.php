@@ -51,6 +51,9 @@ class NoteController extends Controller
             $table->editColumn('note', function ($row) {
                 return $row->note ? $row->note : '';
             });
+            $table->editColumn('title', function ($row) {
+                return $row->note ? $row->note : '';
+            });
             $table->addColumn('vendor_name', function ($row) {
                 return $row->vendor ? $row->vendor->name : '';
             });

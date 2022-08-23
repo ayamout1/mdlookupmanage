@@ -25,10 +25,18 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.note.fields.note') }}
+                            Title
                         </th>
                         <td>
                             {{ $note->note }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            Note
+                        </th>
+                        <td>
+                            {{ $note->title }}
                         </td>
                     </tr>
                     <tr>

@@ -73,7 +73,7 @@ class WarrantyController extends Controller
 
         $vendors = Vendor::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.warranties.create', compact('vendors'));
+        return back();
     }
 
     public function store(StoreWarrantyRequest $request)
@@ -88,7 +88,7 @@ class WarrantyController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $warranty->id]);
         }
 
-        return redirect()->route('admin.warranties.index');
+        return back();
     }
 
     public function edit(Warranty $warranty)
@@ -117,7 +117,7 @@ class WarrantyController extends Controller
             $warranty->file->delete();
         }
 
-        return redirect()->route('admin.warranties.index');
+        return back();
     }
 
     public function show(Warranty $warranty)
