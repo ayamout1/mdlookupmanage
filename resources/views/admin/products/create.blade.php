@@ -18,16 +18,30 @@
                 <span class="help-block">{{ trans('cruds.product.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="product_misc">{{ trans('cruds.product.fields.product_misc') }}</label>
-                <input class="form-control {{ $errors->has('product_misc') ? 'is-invalid' : '' }}" type="text" name="product_misc" id="product_misc" value="{{ old('product_misc', '') }}">
+                <p>Check if Product Misc</p>
+                <input type="checkbox" name="product_misc" id="product_misc" value="1">
                 @if($errors->has('product_misc'))
                     <span class="text-danger">{{ $errors->first('product_misc') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.product.fields.product_misc_helper') }}</span>
+
             </div>
+
             <div class="form-group">
                 <label for="major_group">{{ trans('cruds.product.fields.major_group') }}</label>
-                <input class="form-control {{ $errors->has('major_group') ? 'is-invalid' : '' }}" type="text" name="major_group" id="major_group" value="{{ old('major_group', '') }}">
+
+                <select class="form-control select2"  name="major_group" id="major_group" >
+
+                    <option value="0" style="display: none; !important"></option>
+
+                    <option value="1">Engine Parts</option>
+                    <option value="2">Turbo Chargers</option>
+                    <option value="3">Fuel Injection</option>
+                    <option value="4">Filtration</option>
+                    <option value="5">Services</option>
+                    <option value="6">Miscellaneous</option>
+
+                </select>
                 @if($errors->has('major_group'))
                     <span class="text-danger">{{ $errors->first('major_group') }}</span>
                 @endif
