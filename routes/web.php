@@ -1,5 +1,4 @@
 <?php
-
 Route::redirect('/', '/login');
 
 Route::redirect('/home', '/admin/mainfilter/index');
