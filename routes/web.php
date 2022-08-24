@@ -4,11 +4,10 @@ Route::redirect('/', '/login');
 
 Route::redirect('/home', '/admin/mainfilter/index');
 
-
 Auth::routes(['register' => True]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
-    Route::get('mainfilter/index', [\App\Http\Controllers\Admin\MainfilterController::class, 'index'])->name('mainfilter.index');
+    Route::get('/', 'HomeController@index')->name('home');
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');
