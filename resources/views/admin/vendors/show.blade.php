@@ -1090,7 +1090,7 @@
         var uploadedFileMap = {}
         Dropzone.options.fileDropzone = {
             url: '{{ route('admin.notes.storeMedia') }}',
-            maxFilesize: 50, // MB
+            maxFilesize: 100, // MB
             addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
