@@ -94,7 +94,32 @@ class ContactController extends Controller
 
         return back();
     }
+    public static function ajaxstore(Request $request)
+    {
 
+
+
+
+        Contact::Create([
+            'name' => $request->name,
+            'website' => $request->website,
+
+            'phone' => $request->phone,
+            'email' => $request->email,
+
+            'address' => $request->address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'zipcode' => $request->zipcode,
+            'extension' => $request->extension,
+            'vendor_id' => $request->vendor_id
+        ]);
+
+
+        return Response()->json();
+
+
+    }
     public function store(StoreContactRequest $request)
     {
         $contact = Contact::create($request->all());
@@ -110,7 +135,7 @@ class ContactController extends Controller
 
         $contact->load('vendor');
 
-        return back();
+        return view('admin.contacts.edit', compact('contact','vendors'));
     }
 
     public function update(UpdateContactRequest $request, Contact $contact)

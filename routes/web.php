@@ -53,8 +53,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('user-alerts', 'UserAlertsController', ['except' => ['edit', 'update']]);
 
     // Address
+
     Route::delete('addresses/destroy', 'AddressController@massDestroy')->name('addresses.massDestroy');
+    Route::post('addresses/ajaxstore', [\App\Http\Controllers\Admin\AddressController::class, 'ajaxstore'])->name('addresses.ajaxstore');
     Route::resource('addresses', 'AddressController');
+
 
 
 // Vendor Assign Engine Product Brand Service
@@ -63,6 +66,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::post('vendors/supdate', [\App\Http\Controllers\Admin\VendorController::class, 'supdate'])->name('vendors.supdate');
         Route::post('vendors/s/assign/la', [\App\Http\Controllers\Admin\VendorController::class, 'assignsla'])->name('vendors.s.assign.la');
         Route::post('vendors/s/assign/de', [\App\Http\Controllers\Admin\VendorController::class, 'assignsde'])->name('vendors.s.assign.de');
+        Route::post('vendors/forms/address-form',[\App\Http\Controllers\Admin\VendorController::class, 'addressform'])->name('vendorsaddress');
 
     });
 
@@ -76,6 +80,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Contact
     Route::delete('contacts/destroy', 'ContactController@massDestroy')->name('contacts.massDestroy');
+    Route::post('contacts/ajaxstore', [\App\Http\Controllers\Admin\ContactController::class, 'ajaxstore'])->name('contacts.ajaxstore');
     Route::resource('contacts', 'ContactController');
 
     // Engine

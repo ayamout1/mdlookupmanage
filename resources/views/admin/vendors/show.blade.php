@@ -1,5 +1,8 @@
 @extends('admin.admin_master')
 @section('admin')
+
+
+
     <div class="page-content">
         <div class="container-fluid">
 
@@ -65,12 +68,14 @@
 
 
                                                 </ul>
+                                                </ul>
 
 
 
                                         </div>
                                         <div class="col-lg">
-                                            <button class="btn btn-primary" onclick="hiddenbutton()">Edit</button>
+                                            <button class="btn btn-primary show-page modal-btne" data-page="edit" id="edit" href="#editmode">Edit</button>
+                                            <button class="btn btn-primary show-page modal-btns" data-page="save" id="save" href="#savemode">Save</button>
 
                                         </div>
 
@@ -89,7 +94,7 @@
                     <div class="card m-b-30">
                         <div class="card-body">
                             <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
+                            <ul class="nav nav-tabs" role="tablist" id="myTab">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab">
                                         <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
@@ -162,8 +167,16 @@
                                                     <td>{{ $cdata->extension  ?? 'no contact'}}</td>
                                                     <td><a href="mailto: {{ $cdata->email}} ">{{ $cdata->email  ?? 'no email on file'}}</a></td>
 {{--                                                    <td><a href="{{ $cdata->website}}">{{ $cdata->website ?? 'no website on file'}}</a></td>--}}
-                                                    <form action="{{ route('admin.contacts.destroy',$cdata->id) }}" method="POST">
-                                                        <td class="khara d-none">  <a class="popup-form btn btn-primary" href="#edit-form">Edit Contact</a></td>
+{{--                                                    <td class="khara d-none">  <a class="popup-form btn btn-primary" href="{{ route('admin.contacts.edit',$cdata->id) }} ">Edit Contact</a></td>--}}
+                                                    <form action="{{ route('admin.contacts.edit',$cdata->id) }}" id="editcontact" method="GET">
+
+                                                        <td class="khara d-none">@csrf
+
+                                                            <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
+                                                            <input type="hidden" name="vendor_page" value="1">
+                                                           <button type="submit" class="btn btn-danger">Edit Contact</button>
+                                                        </td></form>  <form action="{{ route('admin.contacts.destroy',$cdata->id) }}" id="contactdelete" method="POST">
+
                                                         <td class="khara d-none">@csrf
                                                             @method('DELETE')
                                                             <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
@@ -175,9 +188,88 @@
 
                                             </tbody>
                                         </table>
+                                        <div class="contactadd d-none" id="contact-form">
+                                            <div class="card-body">
+                                                <h4 class="mb-4">Add Contact</h4>
+                                                <form action="{{ route('admin.contacts.store') }}" name="contactForm" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>Name:</strong>
+
+                                                                <input type="text" class="form-control" id="validationCustom01" name="name" placeholder="Name" required />
+                                                                <div class="invalid-feedback">Name Required</div>
+                                                                <div class="valid-feedback">Looks good!</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>Website:</strong>
+                                                                <input type="text" name="website" class="form-control" placeholder="Website">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>Email:</strong>
+                                                                <input type="text" name="email" class="form-control" placeholder="email">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>Phone:</strong>
+                                                                <input type="text" name="phone" class="form-control" placeholder="phone" required>
+                                                                <div class="invalid-feedback">Name Required</div>
+                                                                <div class="valid-feedback">Looks good!</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>Extension:</strong>
+                                                                <input type="text" name="extension" class="form-control" placeholder="Extension">
+                                                                <div class="valid-feedback">Looks good!</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>Address:</strong>
+                                                                <input type="text" name="address" class="form-control" placeholder="address">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>City:</strong>
+                                                                <input type="text" name="city" class="form-control" placeholder="city">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>State:</strong>
+                                                                <input type="text" name="state" class="form-control" placeholder="state">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>Zip code:</strong>
+                                                                <input type="text" name="zipcode" class="form-control" placeholder="zipcode">
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
+                                                        <input type="hidden" name="vendor_page" value="1">
+
+                                                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                                            <button type="submit" class="btn btn-primary" id="btn-save">Save changes
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                </form></div></div>
 
                                     </div>
-                                    <div class="khara d-none"><a class="popup-form btn btn-primary" href="#contact-form">Add Contact</a></div>
+                                    <div class="khara d-none"><a class="btn btn-primary" href="#contact-form" onclick="contactadd()" id="contactadd">Add Contact</a></div>
 
 </div>
                                 <div class="tab-pane" id="locations" role="tabpanel">
@@ -186,36 +278,120 @@
 
                                             <thead>
                                             <tr>
-                                                <th>Locations</th>
+
+                                                <th>Contact</th>
+                                                <th>Phone</th>
+                                                <th>E-mail</th>
+                                                <th>Address</th>
                                                 <th class="khara d-none">Delete</th>
 
                                             </tr>
                                             </thead>
                                             <tbody>
                                             @foreach($addresses as $address)
-                                            <tr>
-                                                <th scope="row">    <a href="http://maps.google.com/?q={{ $address->address.', '.$address->city.', '.$address->state.', '.$address->zipcode  ?? 'no contact'}}" target="_blank">{{ $address->address.', '.$address->city.', '.$address->state.',  '.$address->zipcode  ?? 'no contact'}}</a></th>
-                                                <form action="{{ route('admin.addresses.destroy',$address->id) }}" method="POST">
-                                                <td class="khara d-none">@csrf
-                                                    @method('DELETE')
-                                                    <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
-                                                    <input type="hidden" name="vendor_page" value="1">
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                </td></form>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="row">{{ $address->contact  ?? 'no contact'}}</th>
+                                                    <td><a href="tel{{ $address->phone  ?? 'no contact'}}">{{ $address->phone  ?? 'no contact'}}</a></td>
+                                                    <td><a href="mailto: {{ $address->email}} ">{{ $address->email  ?? 'no email on file'}}</a></td>
+                                                    <th scope="row">    <a href="http://maps.google.com/?q={{ $address->address.', '.$address->city.', '.$address->state.', '.$address->zipcode  ?? 'no contact'}}" target="_blank">{{ $address->address.', '.$address->city.', '.$address->state.',  '.$address->zipcode  ?? 'no contact'}}</a></th>
+                                                    <form id="addressdelete" action="{{ route('admin.addresses.destroy',$address->id) }}" method="POST">
+                                                        <td class="khara d-none">@csrf
+                                                            @method('DELETE')
+                                                            <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
+                                                            <input type="hidden" name="vendor_page" value="1">
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </td></form>
+                                                </tr>
                                             @endforeach
                                             @foreach($cdatas as $cdata)
-                                            <tr>
-                                                <td><a href="http://maps.google.com/?q={{ $cdata->address.', '.$cdata->city.', '.$cdata->state.', '.$cdata->zipcode  ?? 'no contact'}}" target="_blank">{{ $cdata->address.', '.$cdata->city.', '.$cdata->state.',  '.$cdata->zipcode  ?? 'no contact'}}</a></td>
+                                                <tr>
+                                                    <td><a href="http://maps.google.com/?q={{ $cdata->address.', '.$cdata->city.', '.$cdata->state.', '.$cdata->zipcode  ?? 'no contact'}}" target="_blank">{{ $cdata->address.', '.$cdata->city.', '.$cdata->state.',  '.$cdata->zipcode  ?? 'no contact'}}</a></td>
 
-
-                                            </tr>
+                                                </tr>
                                             @endforeach
                                             </tbody>
                                         </table>
-                                    </div>
-                                    <div class="khara d-none"> <a class="popup-form btn btn-primary" href="#address-form">Add Location</a></div>
-                                </div>
+       <div class="khara d-none"> <button class="btn btn-primary" onclick="locationadd()" id="addloc">Add Location</button></div>
+                                        {{--        <div class="card mfp-hide mfp-popup-form mx-auto" id="address-form">--}}
+                                        <div class="addloc d-none">
+                                            <div class="card-body">
+                                                <h4 class="mb-4">Add Address</h4>
+                                                <form id="addressForm" action="{{route('admin.addresses.ajaxstore')}}"  name="addressForm" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+
+                                                    <div class="row">
+
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>Contact Name:</strong>
+                                                                <input type="text" name="contact" id="contact" class="form-control" placeholder="Contact" required>
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>Phone:</strong>
+                                                                <input type="text" name="phone" id="phone" class="form-control" placeholder="phone" required>
+
+
+                                                            </div>
+                                                        </div>                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>Email:</strong>
+                                                                <input type="text" name="email" id="email" class="form-control" placeholder="email" required>
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>Address:</strong>
+                                                                <input type="text" name="address" id="address" class="form-control" placeholder="address" required>
+                                                                <div class="invalid-feedback">Address Required</div>
+                                                                <div class="valid-feedback">Looks good!</div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>City:</strong>
+                                                                <input type="text" name="city" id="city" class="form-control" placeholder="city" required>
+                                                                <div class="invalid-feedback">City Required</div>
+                                                                <div class="valid-feedback">Looks good!</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>State:</strong>
+                                                                <input type="text" name="state" id="state" class="form-control" placeholder="state" required>
+                                                                <div class="invalid-feedback">State Required</div>
+                                                                <div class="valid-feedback">Looks good!</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="form-group">
+                                                                <strong>Zip code:</strong>
+                                                                <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="zipcode" required>
+                                                                <div class="invalid-feedback">Zipcode Required</div>
+                                                                <div class="valid-feedback">Looks good!</div>
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="vendor_id" id="vendor_id" value="{{$vendor->id}}">
+                                                        <input type="hidden" name="vendor_page" value="1">
+
+                                                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                                            <button type="submit" class="btn btn-primary" id="btn-save">Save changes
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                </form></div></div>
+
+                                    </div></div>
+
+
                                 <div class="tab-pane" id="notes" role="tabpanel">
 
                                     <div class="table-responsive">
@@ -257,6 +433,7 @@
                                         </tbody>
                                         </table>
                                      <p class="khara d-none"><a class="popup-form btn btn-primary" href="#notes-form">Add Attachment</a></p>
+
                                 </div>
                                 </div>
                                 <div class="tab-pane" id="note" role="tabpanel">
@@ -721,220 +898,9 @@
     </div>
 
 {{--    form section--}}
-        <div class="card mfp-hide mfp-popup-form mx-auto" id="address-form">
-            <div class="card-body">
-                <h4 class="mb-4">Add Address</h4>
-                <form action="{{ route('admin.addresses.store') }}" method="POST" class="needs-validation">
-                    @csrf
 
-                    <div class="row">
 
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Address:</strong>
-                                <input type="text" name="address" class="form-control" placeholder="address" required>
-                                <div class="invalid-feedback">Address Required</div>
-                                <div class="valid-feedback">Looks good!</div>
 
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>City:</strong>
-                                <input type="text" name="city" class="form-control" placeholder="city" required>
-                                <div class="invalid-feedback">City Required</div>
-                                <div class="valid-feedback">Looks good!</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>State:</strong>
-                                <input type="text" name="state" class="form-control" placeholder="state" required>
-                                <div class="invalid-feedback">State Required</div>
-                                <div class="valid-feedback">Looks good!</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Zip code:</strong>
-                                <input type="text" name="zipcode" class="form-control" placeholder="zipcode" required>
-                                <div class="invalid-feedback">Zipcode Required</div>
-                                <div class="valid-feedback">Looks good!</div>
-                            </div>
-                        </div>
-                        <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
-                        <input type="hidden" name="vendor_page" value="1">
-
-                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-
-                </form></div></div>
-        <div class="card mfp-hide mfp-popup-form mx-auto" id="contact-form">
-            <div class="card-body">
-                <h4 class="mb-4">Add Contact</h4>
-                <form action="{{ route('admin.contacts.store') }}" method="POST" class="needs-validation">
-                    @csrf
-
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Name:</strong>
-
-                                <input type="text" class="form-control" id="validationCustom01" name="name" placeholder="Name" required />
-                                <div class="invalid-feedback">Name Required</div>
-                                <div class="valid-feedback">Looks good!</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Website:</strong>
-                                <input type="text" name="website" class="form-control" placeholder="Website">
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Email:</strong>
-                                <input type="text" name="email" class="form-control" placeholder="email">
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Phone:</strong>
-                                <input type="text" name="phone" class="form-control" placeholder="phone" required>
-                                <div class="invalid-feedback">Name Required</div>
-                                <div class="valid-feedback">Looks good!</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Extension:</strong>
-                                <input type="text" name="extension" class="form-control" placeholder="Extension">
-                                <div class="valid-feedback">Looks good!</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Address:</strong>
-                                <input type="text" name="address" class="form-control" placeholder="address">
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>City:</strong>
-                                <input type="text" name="city" class="form-control" placeholder="city">
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>State:</strong>
-                                <input type="text" name="state" class="form-control" placeholder="state">
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Zip code:</strong>
-                                <input type="text" name="zipcode" class="form-control" placeholder="zipcode">
-                            </div>
-                        </div>
-                        <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
-                        <input type="hidden" name="vendor_page" value="1">
-
-                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-
-                </form></div></div>
-        <div class="card mfp-hide mfp-popup-form mx-auto" id="edit-form">
-            <div class="card-body">
-                <h4 class="mb-4">Edit Contact</h4>
-                @foreach($cdatas as $cdata)
-                    <form action="{{ route('admin.contacts.update',$cdata->id) }}" method="POST" class="needs-validation">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>Name:</strong>
-                                    <input type="text" name="name" value="{{ $cdata->name }}" class="form-control" placeholder="Name" required>
-                                    <div class="invalid-feedback">Name Required</div>
-                                    <div class="valid-feedback">Looks good!</div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>Website:</strong>
-                                    <input type="text" name="website" value="{{ $cdata->website }}" class="form-control"
-                                           placeholder="website">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>Email:</strong>
-                                    <input type="text" name="email" value="{{ $cdata->email }}" class="form-control"
-                                           placeholder="email">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>Phone:</strong>
-                                    <input type="text" name="phone" value="{{ $cdata->phone }}" class="form-control"
-                                           placeholder="phone" required>
-                                    <div class="invalid-feedback">Phone Required</div>
-                                    <div class="valid-feedback">Looks good!</div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>Extension:</strong>
-                                    <input type="text" name="extension" value="{{ $cdata->extension }}" class="form-control" placeholder="Extension">
-                                    <div class="valid-feedback">Looks good!</div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>Address:</strong>
-                                    <input type="text" name="address" value="{{ $cdata->address }}" class="form-control"
-                                           placeholder="address">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>City:</strong>
-                                    <input type="text" name="city" value="{{ $cdata->city }}" class="form-control" placeholder="city">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>State:</strong>
-                                    <input type="text" name="state" value="{{ $cdata->state }}" class="form-control"
-                                           placeholder="state">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>Zipcode:</strong>
-                                    <input type="text" name="zipcode" value="{{ $cdata->zipcode }}" class="form-control"
-                                           placeholder="zipcode">
-                                </div>
-                            </div>
-                            <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
-                            <input type="hidden" name="vendor_page" value="1">
-
-                            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </div>
-
-                    </form>
-                @endforeach
-            </div></div>
     <div class="card mfp-hide mfp-popup-form mx-auto" id="warranty-form">
         <div class="card-body">
             <form action="{{ route('admin.warranties.store') }}" method="POST"  class="was-validated">
@@ -1065,32 +1031,59 @@
 
     @section('scripts')
     <script>
-        function hiddenbutton() {
+        function locationadd() {
 
-            $('.khara').toggleClass('d-none');
+            $('.addloc').toggleClass('d-none');
 
-            //
-            // var x = document.getElementsByClassName("khara");
-            // document.getElementsByClassName("khara").classList.add('MyClass');
-            //
-            // document.getElementById("MyElement").classList.remove('MyClass');
-            //
-            // if ( document.getElementById("MyElement").classList.contains('MyClass') )
-            //
-            //     document.getElementById("MyElement").classList.toggle('MyClass');
-            // if (x.class === "d-none") {
-            //     x.class = "";
-            // } else {
-            //     x.class = "d-none";
-            // }
 
         }
+        function contactadd() {
+
+            $('.contactadd').toggleClass('d-none');
+
+
+        }
+        $(document).ready(function(){
+            $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
+                localStorage.setItem('activeTab', $(e.target).attr('href'));
+            });
+            var activeTab = localStorage.getItem('activeTab');
+            if(activeTab){
+                $('#myTab a[href="' + activeTab + '"]').tab('show');
+            }
+            var editmode = localStorage.getItem('edit');
+
+            if (editmode == 1){
+                $('.khara').removeClass('d-none');
+            }
+            else if (editmode == 2){
+
+                $('.khara').addClass('d-none');
+
+            }
+
+            $('.modal-btne').click(function() {
+                $('.khara').removeClass('d-none');
+                localStorage.setItem('edit',1);
+            });
+            $('.modal-btns').click(function() {
+                $('.khara').addClass('d-none');
+                localStorage.setItem('edit',2);
+
+            });
+            });
+
+
+
+
+
+
 
             // access Dropzone here
         var uploadedFileMap = {}
         Dropzone.options.fileDropzone = {
             url: '{{ route('admin.notes.storeMedia') }}',
-            maxFilesize: 100, // MB
+            maxFilesize: 50, // MB
             addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1132,8 +1125,106 @@
         }
 
 
+            $('#addressForm').submit(function(e) {
+
+            e.preventDefault();
+                var formData = new FormData(this);
+                //
+                // var address = $("address").val();
+                // var city = $("city").val();
+                // var state = $("state").val();
+                // var zipcode = $("zipcode").val();
+                // var vendor_id = $("vendor_id").val();
+                //
+            $.ajax({
+
+
+                method: 'POST',
+                url:"{{ route('admin.addresses.ajaxstore') }}",
+                data: formData,
+                // data:{address:address, city:city, state:state, zipcode:zipcode, vendor_id:vendor_id},
+                headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}"},
+            cache:false,
+            contentType: false,
+            processData: false,
+
+            error: function(data){
+
+            console.log(data);
+        }
+
+                })
+            .done(function () { location.reload()})});
+        $('#addressdelete').submit(function(e) {
+
+            e.preventDefault();
+
+//
+// var address = $("address").val();
+// var city = $("city").val();
+// var state = $("state").val();
+// var zipcode = $("zipcode").val();
+// var vendor_id = $("vendor_id").val();
+//
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}"},
+                method: 'POST',
+                url: config.url,
+                data: { id: id, _method: 'DELETE' }})
+
+                .done(function () { location.reload() })});
+
+        $('#contactForm').submit(function(e) {
+
+            e.preventDefault();
+                var formData = new FormData(this);
+                //
+                // var address = $("address").val();
+                // var city = $("city").val();
+                // var state = $("state").val();
+                // var zipcode = $("zipcode").val();
+                // var vendor_id = $("vendor_id").val();
+                //
+            $.ajax({
+
+
+                method: 'POST',
+                url:"{{ route('admin.contacts.ajaxstore') }}",
+                data: formData,
+                // data:{address:address, city:city, state:state, zipcode:zipcode, vendor_id:vendor_id},
+                headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}"},
+            cache:false,
+            contentType: false,
+            processData: false,
+
+            error: function(data){
+
+            console.log(data);
+        }
+
+                })
+            .done(function () { location.reload()})});
+        $('#contactdelete').submit(function(e) {
+
+            e.preventDefault();
+
+//
+// var address = $("address").val();
+// var city = $("city").val();
+// var state = $("state").val();
+// var zipcode = $("zipcode").val();
+// var vendor_id = $("vendor_id").val();
+//
+            $.ajax({
+                headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}"},
+                method: 'POST',
+                url: config.url,
+                data: { id: id, _method: 'DELETE' }})
+
+                .done(function () { location.reload() })});
 
     </script>
+
 @endsection
 @endsection
 

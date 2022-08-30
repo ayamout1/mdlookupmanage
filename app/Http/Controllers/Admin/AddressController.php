@@ -82,12 +82,64 @@ class AddressController extends Controller
 
         return view('admin.addresses.create', compact('vendors'));
     }
-
-    public function store(StoreAddressRequest $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        $address = Address::create($request->all());
 
-        return back();
+
+        $vendorId = $request->vendor_id;
+
+        $vendor   =   Address::updateOrCreate(
+            [
+                'id' => $vendorId
+            ],
+            [
+                'contact' => $request->contact,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'email' => $request->address,
+                'city' => $request->city,
+                'state' => $request->state,
+                'zipcode' => $request->zipcode
+            ]);
+
+        return Response()->json($vendor);
+
+
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public static function ajaxstore(Request $request)
+    {
+
+
+
+
+  Address::Create([
+      'contact' => $request->contact,
+      'phone' => $request->phone,
+      'email' => $request->email,
+
+                'address' => $request->address,
+                'city' => $request->city,
+                'state' => $request->state,
+                'zipcode' => $request->zipcode,
+                'vendor_id' => $request->vendor_id
+            ]);
+
+
+        return Response()->json();
+
+
     }
 
     public function edit(Address $address)
