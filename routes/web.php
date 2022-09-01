@@ -3,6 +3,9 @@ Route::redirect('/', '/login');
 
 Route::redirect('/home', '/admin/mainfilter/index');
 
+Route::get('sendbasicemail','MailController@basic_email');
+Route::get('sendhtmlemail','MailController@html_email');
+Route::get('sendattachmentemail','MailController@attachment_email');
 Auth::routes(['register' => True]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
@@ -77,6 +80,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Brand
     Route::delete('brands/destroy', 'BrandController@massDestroy')->name('brands.massDestroy');
     Route::resource('brands', 'BrandController');
+
+
+    //email tester
 
     // Contact
     Route::delete('contacts/destroy', 'ContactController@massDestroy')->name('contacts.massDestroy');

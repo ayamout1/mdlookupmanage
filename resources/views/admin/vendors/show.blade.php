@@ -452,6 +452,7 @@
 
 
                                             @foreach($notes as $note)
+
                                                 <tr>
                                                     <td>
                                                         {{$note->title}}
@@ -470,6 +471,8 @@
                                             </tbody>
                                         </table>
                                     </div>
+
+
                                     <p class="khara d-none">  <a class="popup-form btn btn-primary" href="#addnote">Add Note</a></p>
 
                                 </div>
@@ -600,7 +603,7 @@
                         <div class="card-body">
 
 
-                            <ul class="nav nav-tabs" role="tablist">
+                            <ul class="nav nav-tabs" role="tablist" id="myTab1">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-bs-toggle="tab" href="#engines" role="tab">
                                         <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
@@ -1013,7 +1016,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="note">Note</label>
-                    <input class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}" type="text" name="title" id="note" value="{{ old('title', '') }}">
+                    <textarea class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}" type="text" name="title" id="note" value="{{ old('title', '') }}" rows="5"></textarea>
                     @if($errors->has('note'))
                         <span class="text-danger">{{ $errors->first('note') }}</span>
                     @endif
@@ -1051,6 +1054,15 @@
             if(activeTab){
                 $('#myTab a[href="' + activeTab + '"]').tab('show');
             }
+            $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
+                localStorage.setItem('activeTab1', $(e.target).attr('href'));
+            });
+            var activeTab1 = localStorage.getItem('activeTab1');
+            if(activeTab1){
+                $('#myTab1 a[href="' + activeTab1 + '"]').tab('show');
+            }
+
+
             var editmode = localStorage.getItem('edit');
 
             if (editmode == 1){
