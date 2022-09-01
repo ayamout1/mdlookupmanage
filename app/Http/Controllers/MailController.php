@@ -9,12 +9,12 @@ use App\Http\Controllers\Controller;
 
 class MailController extends Controller {
     public function basic_email() {
-        $data = array('name'=>"Abdul Local");
+        $data = array('name'=>"Abdul production");
 
         Mail::send(['text'=>'mail'], $data, function($message) {
             $message->to('kyates@mddistributors.com', 'V Stokely')->subject
             (' Testing Mail');
-            $message->from('vendorlist@mddistributors.com','Local abdul');
+            $message->from('vendorlist@mddistributors.com','production abdul');
         });
         echo "Basic Email Sent. Check your inbox.";
     }
