@@ -9,6 +9,7 @@ use App\Models\Engine;
 use App\Models\Product;
 use App\Models\Service;
 use App\Models\Vendor;
+use App\Models\PreludeNumber;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -40,6 +41,15 @@ class MainfilterController extends Controller
 
         return view('admin.vendorlookup.index', compact('vendors','pdatas1','pdatas6','pdatas2','pdatas3','pdatas4','pdatas5','pdatas','cdatas','bdatas','edatas','sdatas'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+    public function reportprelude()
+    {
+
+        $preludes = Vendor::doesntHave('vendorPreludeNumbers')->get();
+
+        return view('admin.vendorlookup.reportprelude', compact('preludes'));
+
     }
 
     public function show()

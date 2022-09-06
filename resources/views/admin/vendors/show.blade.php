@@ -142,7 +142,7 @@
 
                             <!-- Tab panes -->
                             <div class="tab-content p-3 text-muted">
-                                <div class="tab-pane active" id="home" role="tabpanel">
+                                <div class="tab-pane" id="home" role="tabpanel">
 
 
                                     <div class="table-responsive">
@@ -532,7 +532,7 @@
                                     <p class="khara d-none">  <a class="popup-form btn btn-primary" href="#warranty-form">Add Warranty info</a></p>
 
                                 </div>
-                                <div class="tab-pane" id="preludenumber" role="tabpanel">
+                                <div class="tab-pane active" id="preludenumber" role="tabpanel">
                                     <div class="table-responsive">
                                         <table class="table table-striped mb-0">
 
