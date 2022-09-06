@@ -51,6 +51,14 @@ class MainfilterController extends Controller
         return view('admin.vendorlookup.reportprelude', compact('preludes'));
 
     }
+    public function reportvendornumbers()
+    {
+
+        $vendornumbers = Vendor::doesntHave('vendorVendorNumbers')->get();
+
+        return view('admin.vendorlookup.reportvendornumber', compact('vendornumbers'));
+
+    }
 
     public function show()
     {
