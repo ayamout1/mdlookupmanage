@@ -96,7 +96,7 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist" id="myTab">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#home" role="tab">
                                         <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                         <span class="d-none d-sm-block">Contact Info</span>
                                     </a>
@@ -127,7 +127,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#preludenumber" role="tab">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#preludenumber" role="tab">
                                         <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                         <span class="d-none d-sm-block">Prelude Number</span>
                                     </a>
@@ -162,9 +162,9 @@
                                             <tbody>
                                             @foreach($cdatas as $cdata)
                                                 <tr>
-                                                    <th scope="row">{{ $cdata->name  ?? 'no contact'}}</th>
-                                                    <td><a href="tel{{ $cdata->phone  ?? 'no contact'}}">{{ $cdata->phone  ?? 'no contact'}}</a></td>
-                                                    <td>{{ $cdata->extension  ?? 'no contact'}}</td>
+                                                    <th scope="row">{{ $cdata->name  ?? 'no name on file'}}</th>
+                                                    <td><a href="tel{{ $cdata->phone  ?? 'no contact'}}">{{ $cdata->phone  ?? 'no phone number on file'}}</a></td>
+                                                    <td>{{ $cdata->extension  ?? 'no Extension on file'}}</td>
                                                     <td><a href="mailto: {{ $cdata->email}} ">{{ $cdata->email  ?? 'no email on file'}}</a></td>
 {{--                                                    <td><a href="{{ $cdata->website}}">{{ $cdata->website ?? 'no website on file'}}</a></td>--}}
 {{--                                                    <td class="khara d-none">  <a class="popup-form btn btn-primary" href="{{ route('admin.contacts.edit',$cdata->id) }} ">Edit Contact</a></td>--}}
@@ -290,10 +290,10 @@
                                             <tbody>
                                             @foreach($addresses as $address)
                                                 <tr>
-                                                    <th scope="row">{{ $address->contact  ?? 'no contact'}}</th>
-                                                    <td><a href="tel{{ $address->phone  ?? 'no contact'}}">{{ $address->phone  ?? 'no contact'}}</a></td>
+                                                    <td >{{ $address->contact  ?? 'no name on file'}}</td>
+                                                    <td><a href="tel{{ $address->phone  ?? 'no phone on file'}}">{{ $address->phone  ?? 'no phone on file'}}</a></td>
                                                     <td><a href="mailto: {{ $address->email}} ">{{ $address->email  ?? 'no email on file'}}</a></td>
-                                                    <th scope="row">    <a href="http://maps.google.com/?q={{ $address->address.', '.$address->city.', '.$address->state.', '.$address->zipcode  ?? 'no contact'}}" target="_blank">{{ $address->address.', '.$address->city.', '.$address->state.',  '.$address->zipcode  ?? 'no contact'}}</a></th>
+                                                    <td >    <a href="http://maps.google.com/?q={{ $address->address.', '.$address->city.', '.$address->state.', '.$address->zipcode  ?? 'no contact'}}" target="_blank">{{ $address->address.', '.$address->city.', '.$address->state.',  '.$address->zipcode  ?? 'no contact'}}</a></td>
                                                     <form id="addressdelete" action="{{ route('admin.addresses.destroy',$address->id) }}" method="POST">
                                                         <td class="khara d-none">@csrf
                                                             @method('DELETE')
@@ -305,8 +305,27 @@
                                             @endforeach
                                             @foreach($cdatas as $cdata)
                                                 <tr>
-                                                    <td><a href="http://maps.google.com/?q={{ $cdata->address.', '.$cdata->city.', '.$cdata->state.', '.$cdata->zipcode  ?? 'no contact'}}" target="_blank">{{ $cdata->address.', '.$cdata->city.', '.$cdata->state.',  '.$cdata->zipcode  ?? 'no contact'}}</a></td>
+                                                    <td>{{ $cdata->name  ?? 'no name on file'}}</td>
+                                                    <td><a href="tel{{ $cdata->phone  ?? 'no contact'}}">{{ $cdata->phone  ?? 'no phone number on file'}}</a></td>
+                                                    <td><a href="mailto: {{ $cdata->email}} ">{{ $cdata->email  ?? 'no email on file'}}</a></td>
+                                                    <td><a href="http://maps.google.com/?q={{ $cdata->address.', '.$cdata->city.', '.$cdata->state.', '.$cdata->zipcode  ?? 'no address on file'}}" target="_blank">{{ $cdata->address.', '.$cdata->city.', '.$cdata->state.',  '.$cdata->zipcode  ?? 'no address onn file'}}</a></td>
+                                                    {{--                                                    <td><a href="{{ $cdata->website}}">{{ $cdata->website ?? 'no website on file'}}</a></td>--}}
+                                                    {{--                                                    <td class="khara d-none">  <a class="popup-form btn btn-primary" href="{{ route('admin.contacts.edit',$cdata->id) }} ">Edit Contact</a></td>--}}
+                                                    <form action="{{ route('admin.contacts.edit',$cdata->id) }}" id="editcontact" method="GET">
 
+                                                        <td class="khara d-none">@csrf
+
+                                                            <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
+                                                            <input type="hidden" name="vendor_page" value="1">
+                                                            <button type="submit" class="btn btn-danger">Edit Contact</button>
+                                                        </td></form>  <form action="{{ route('admin.contacts.destroy',$cdata->id) }}" id="contactdelete" method="POST">
+
+                                                        <td class="khara d-none">@csrf
+                                                            @method('DELETE')
+                                                            <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
+                                                            <input type="hidden" name="vendor_page" value="1">
+                                                            @can('delete')  <button type="submit" class="btn btn-danger">Delete Contact</button>@endcan
+                                                        </td></form>
                                                 </tr>
                                             @endforeach
                                             </tbody>
@@ -324,7 +343,7 @@
                                                         <div class="col-xs-12 col-sm-12 col-md-12">
                                                             <div class="form-group">
                                                                 <strong>Contact Name:</strong>
-                                                                <input type="text" name="contact" id="contact" class="form-control" placeholder="Contact" required>
+                                                                <input type="text" name="contact" id="contact" class="form-control" placeholder="Contact">
 
 
                                                             </div>
@@ -332,14 +351,14 @@
                                                         <div class="col-xs-12 col-sm-12 col-md-12">
                                                             <div class="form-group">
                                                                 <strong>Phone:</strong>
-                                                                <input type="text" name="phone" id="phone" class="form-control" placeholder="phone" required>
+                                                                <input type="text" name="phone" id="phone" class="form-control" placeholder="phone">
 
 
                                                             </div>
                                                         </div>                                                        <div class="col-xs-12 col-sm-12 col-md-12">
                                                             <div class="form-group">
                                                                 <strong>Email:</strong>
-                                                                <input type="text" name="email" id="email" class="form-control" placeholder="email" required>
+                                                                <input type="text" name="email" id="email" class="form-control" placeholder="email">
 
 
                                                             </div>
@@ -1048,22 +1067,22 @@
         }
         $(document).ready(function(){
             $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
-                localStorage.setItem('activeTab', $(e.target).attr('href'));
+                sessionStorage.setItem('activeTab', $(e.target).attr('href'));
             });
-            var activeTab = localStorage.getItem('activeTab');
+            var activeTab = sessionStorage.getItem('activeTab');
             if(activeTab){
                 $('#myTab a[href="' + activeTab + '"]').tab('show');
             }
             $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
-                localStorage.setItem('activeTab1', $(e.target).attr('href'));
+                sessionStorage.setItem('activeTab1', $(e.target).attr('href'));
             });
-            var activeTab1 = localStorage.getItem('activeTab1');
+            var activeTab1 = sessionStorage.getItem('activeTab1');
             if(activeTab1){
                 $('#myTab1 a[href="' + activeTab1 + '"]').tab('show');
             }
 
 
-            var editmode = localStorage.getItem('edit');
+            var editmode = sessionStorage.getItem('edit');
 
             if (editmode == 1){
                 $('.khara').removeClass('d-none');
