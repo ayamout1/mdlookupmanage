@@ -129,7 +129,6 @@ class ContactController extends Controller
 
     public function edit(Contact $contact)
     {
-        abort_if(Gate::denies('contact_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $vendors = Vendor::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -137,12 +136,22 @@ class ContactController extends Controller
 
         return view('admin.contacts.edit', compact('contact','vendors'));
     }
+    public function editfront(Contact $contact)
+    {
+        abort_if(Gate::denies('contact_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $vendors = Vendor::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $contact->load('vendor');
+
+        return view('admin.contacts.editfront', compact('contact','vendors'));
+    }
 
     public function update(UpdateContactRequest $request, Contact $contact)
     {
         $contact->update($request->all());
 
-        return back();
+        return redirect()->route('admin.vendors.show',$request->vendor_id);
     }
 
     public function show(Contact $contact)

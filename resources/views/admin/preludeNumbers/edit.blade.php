@@ -1,6 +1,7 @@
-@extends('layouts.admin')
-@section('content')
+@extends('admin.admin_master')
+@section('admin')
 
+    <div style="padding-top: 30px"></div>
 <div class="card">
     <div class="card-header">
         {{ trans('global.edit') }} {{ trans('cruds.preludeNumber.title_singular') }}
@@ -12,7 +13,7 @@
             @csrf
             <div class="form-group">
                 <label for="number">{{ trans('cruds.preludeNumber.fields.number') }}</label>
-                <input class="form-control {{ $errors->has('number') ? 'is-invalid' : '' }}" type="number" name="number" id="number" value="{{ old('number', $preludeNumber->number) }}" step="1">
+                <input class="form-control {{ $errors->has('number') ? 'is-invalid' : '' }}" type="text" name="number" id="number" value="{{ old('number', $preludeNumber->number) }}" step="1">
                 @if($errors->has('number'))
                     <span class="text-danger">{{ $errors->first('number') }}</span>
                 @endif

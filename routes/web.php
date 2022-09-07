@@ -89,6 +89,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Contact
     Route::delete('contacts/destroy', 'ContactController@massDestroy')->name('contacts.massDestroy');
     Route::post('contacts/ajaxstore', [\App\Http\Controllers\Admin\ContactController::class, 'ajaxstore'])->name('contacts.ajaxstore');
+    Route::get('contacts/{id}/editfront/', [\App\Http\Controllers\Admin\ContactController::class, 'editfront'])->name('contacts.editfront');
     Route::resource('contacts', 'ContactController');
 
     // Engine

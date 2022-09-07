@@ -104,7 +104,7 @@ class NoteController extends Controller
         return back();
     }
 
-    public function edit(Note $note)
+    public function edit(Note $note,Request $request)
     {
         abort_if(Gate::denies('note_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -112,7 +112,7 @@ class NoteController extends Controller
 
         $note->load('vendor');
 
-        return view('admin.notes.edit', compact('note', 'vendors'));
+        return view('admin.notes.edit', compact('note', 'vendors','request'));
     }
 
     public function update(UpdateNoteRequest $request, Note $note)
@@ -133,7 +133,7 @@ class NoteController extends Controller
             }
         }
 
-        return redirect()->route('admin.notes.index');
+        return redirect()->route('admin.vendors.show',$request->vendor_id);
     }
 
     public function show(Note $note)

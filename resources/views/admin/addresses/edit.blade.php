@@ -1,6 +1,6 @@
-@extends('layouts.admin')
-@section('content')
-
+@extends('admin.admin_master')
+@section('admin')
+    <div style="padding-top: 30px"></div>
 <div class="card">
     <div class="card-header">
         {{ trans('global.edit') }} {{ trans('cruds.address.title_singular') }}

@@ -117,7 +117,7 @@ class WarrantyController extends Controller
             $warranty->file->delete();
         }
 
-        return back();
+        return redirect()->route('admin.vendors.show',$request->vendor_id);
     }
 
     public function show(Warranty $warranty)

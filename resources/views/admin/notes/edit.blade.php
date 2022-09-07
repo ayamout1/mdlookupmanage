@@ -1,5 +1,7 @@
-@extends('layouts.admin')
-@section('content')
+@extends('admin.admin_master')
+@section('admin')
+
+    <div style="padding-top: 30px"></div>
 
 <div class="card">
     <div class="card-header">
@@ -10,6 +12,8 @@
         <form method="POST" action="{{ route("admin.notes.update", [$note->id]) }}" enctype="multipart/form-data">
             @method('PUT')
             @csrf
+
+            @if($request->note_page != '1')
             <div class="form-group">
                 <label for="note">Title</label>
                 <input class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}" type="text" name="note" id="note" value="{{ old('note', $note->note) }}">
@@ -18,26 +22,39 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.note.fields.note_helper') }}</span>
             </div>
+
+            @endif
+            @if($request->note_page == '1')
             <div class="form-group">
                 <label for="title">Note</label>
-                <input class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}" type="text" name="title" id="note" value="{{ old('title', $note->note) }}">
+                <input class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}" type="text" name="title" id="note" value="{{ old('title', $note->title) }}">
                 @if($errors->has('note'))
                     <span class="text-danger">{{ $errors->first('note') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.note.fields.note_helper') }}</span>
             </div>
-            <div class="form-group">
-                <label for="vendor_id">{{ trans('cruds.note.fields.vendor') }}</label>
-                <select class="form-control select2 {{ $errors->has('vendor') ? 'is-invalid' : '' }}" name="vendor_id" id="vendor_id">
-                    @foreach($vendors as $id => $entry)
-                        <option value="{{ $id }}" {{ (old('vendor_id') ? old('vendor_id') : $note->vendor->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('vendor'))
-                    <span class="text-danger">{{ $errors->first('vendor') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.note.fields.vendor_helper') }}</span>
-            </div>
+                <div class="form-group">
+                    <label for="note">Note Ranking</label>
+                    <input class="form-control {{ $errors->has('note') ? 'is-invalid' : '' }}" type="number" name="ranking" id="ranking" value="{{ old('title', $note->ranking) }}">
+                    @if($errors->has('ranking'))
+                        <span class="text-danger">{{ $errors->first('ranking') }}</span>
+                    @endif
+
+                </div>
+            @endif
+{{--            <div class="form-group">--}}
+{{--                <label for="vendor_id">{{ trans('cruds.note.fields.vendor') }}</label>--}}
+{{--                <select class="form-control select2 {{ $errors->has('vendor') ? 'is-invalid' : '' }}" name="vendor_id" id="vendor_id">--}}
+{{--                    @foreach($vendors as $id => $entry)--}}
+{{--                        <option value="{{ $id }}" {{ (old('vendor_id') ? old('vendor_id') : $note->vendor->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>--}}
+{{--                    @endforeach--}}
+{{--                </select>--}}
+{{--                @if($errors->has('vendor'))--}}
+{{--                    <span class="text-danger">{{ $errors->first('vendor') }}</span>--}}
+{{--                @endif--}}
+{{--                <span class="help-block">{{ trans('cruds.note.fields.vendor_helper') }}</span>--}}
+{{--            </div>--}}
+            @if($request->note_page != '1')
             <div class="form-group">
                 <label for="file">{{ trans('cruds.note.fields.file') }}</label>
                 <div class="needsclick dropzone {{ $errors->has('file') ? 'is-invalid' : '' }}" id="file-dropzone">
@@ -47,6 +64,8 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.note.fields.file_helper') }}</span>
             </div>
+            @endif
+            <input type="hidden" name="vendor_id" value="{{$note->vendor->id }}">
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}

@@ -18,10 +18,8 @@ class UpdatePreludeNumberRequest extends FormRequest
     {
         return [
             'number' => [
+                'string',
                 'nullable',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647',
             ],
         ];
     }

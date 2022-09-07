@@ -158,6 +158,7 @@ class VendorController extends Controller
        // $pdfs = Note::where([['vendor_id',$vendor->id],['title','=','null']])->get();
         $pdfs = Note::where('vendor_id',$vendor->id)->where('title',null)->get();
         $notes = Note::where('vendor_id',$vendor->id)->where('note',null)->get();
+        $noteranking = Note::where('vendor_id',$vendor->id)->where('note',null)->count() + 2;
        // $notes = Note::where([['vendor_id',$vendor->id],['note','=','null']])->get();
 
         $warranties = Warranty::where('vendor_id',$vendor->id)->get();
@@ -166,7 +167,7 @@ class VendorController extends Controller
         $vendornumbers = VendorNumber::where('vendor_id',$vendor->id)->get();
         $preludenumbers = PreludeNumber::where('vendor_id',$vendor->id)->get();
 
-        return view('admin.vendors.show', compact('preludenumbers','pdfs','vendornumbers','addresses','warranties','notes','vendor','pdatas','cdatas','bdatas','edatas','sdatas','pdatas1','cdatas1','bdatas1','edatas1','sdatas1'))
+        return view('admin.vendors.show', compact('noteranking','preludenumbers','pdfs','vendornumbers','addresses','warranties','notes','vendor','pdatas','cdatas','bdatas','edatas','sdatas','pdatas1','cdatas1','bdatas1','edatas1','sdatas1'))
             ->with('i', (request()->input('page', 1) - 1) * 20);
 
     }

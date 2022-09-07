@@ -1,6 +1,7 @@
-@extends('layouts.admin')
-@section('content')
+@extends('admin.admin_master')
+@section('admin')
 
+    <div style="padding-top: 30px"></div>
 <div class="card">
     <div class="card-header">
         {{ trans('global.edit') }} {{ trans('cruds.warranty.title_singular') }}
@@ -18,18 +19,18 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.warranty.fields.warranty_helper') }}</span>
             </div>
-            <div class="form-group">
-                <label for="vendor_id">{{ trans('cruds.warranty.fields.vendor') }}</label>
-                <select class="form-control select2 {{ $errors->has('vendor') ? 'is-invalid' : '' }}" name="vendor_id" id="vendor_id">
-                    @foreach($vendors as $id => $entry)
-                        <option value="{{ $id }}" {{ (old('vendor_id') ? old('vendor_id') : $warranty->vendor->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('vendor'))
-                    <span class="text-danger">{{ $errors->first('vendor') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.warranty.fields.vendor_helper') }}</span>
-            </div>
+{{--            <div class="form-group">--}}
+{{--                <label for="vendor_id">{{ trans('cruds.warranty.fields.vendor') }}</label>--}}
+{{--                <select class="form-control select2 {{ $errors->has('vendor') ? 'is-invalid' : '' }}" name="vendor_id" id="vendor_id">--}}
+{{--                    @foreach($vendors as $id => $entry)--}}
+{{--                        <option value="{{ $id }}" {{ (old('vendor_id') ? old('vendor_id') : $warranty->vendor->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>--}}
+{{--                    @endforeach--}}
+{{--                </select>--}}
+{{--                @if($errors->has('vendor'))--}}
+{{--                    <span class="text-danger">{{ $errors->first('vendor') }}</span>--}}
+{{--                @endif--}}
+{{--                <span class="help-block">{{ trans('cruds.warranty.fields.vendor_helper') }}</span>--}}
+{{--            </div>--}}
             <div class="form-group">
                 <label for="file">{{ trans('cruds.warranty.fields.file') }}</label>
                 <div class="needsclick dropzone {{ $errors->has('file') ? 'is-invalid' : '' }}" id="file-dropzone">
@@ -40,6 +41,7 @@
                 <span class="help-block">{{ trans('cruds.warranty.fields.file_helper') }}</span>
             </div>
             <div class="form-group">
+                <input type="hidden" name="vendor_id" value="{{$warranty->vendor->id }}">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

@@ -157,7 +157,7 @@ class AddressController extends Controller
     {
         $address->update($request->all());
 
-        return redirect()->route('admin.addresses.index');
+        return redirect()->route('admin.vendors.show',$request->vendor_id);
     }
 
     public function show(Address $address)

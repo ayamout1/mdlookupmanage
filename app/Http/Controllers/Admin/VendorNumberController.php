@@ -92,7 +92,7 @@ class VendorNumberController extends Controller
     {
         $vendorNumber->update($request->all());
 
-        return redirect()->route('admin.vendor-numbers.index');
+        return redirect()->route('admin.vendors.show',$request->vendor_id);
     }
 
     public function show(VendorNumber $vendorNumber)
