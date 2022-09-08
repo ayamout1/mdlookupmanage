@@ -39,6 +39,7 @@ class Vendor extends Model
         Vendor::observe(new \App\Observers\VendorActionObserver());
     }
 
+
     public function vendorAddresses()
     {
         return $this->hasMany(Address::class, 'vendor_id', 'id');

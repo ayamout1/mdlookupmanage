@@ -314,7 +314,7 @@
 
                                     @foreach($vendors as $ven)
                                         @foreach($ven->vendorContacts as $cname)
-
+                                            @if ($loop->first)
                                                 @if($ven->ranking == 1)
                                                     <td><span style="display: none">{{$ven->ranking}}</span>Preferred</td>
                                                 @elseif($ven->ranking == 2)
@@ -340,7 +340,7 @@
 @else
                                                         <td><a href="http://{{$cname->website  ?? 'no contact'}}" target="_blank"onMouseOver="this.style.color='red'" onMouseOut="this.style.color='blue'">{{ $cname->website  ?? 'no contact'}}</a></td>
                                             @endif
-
+@endif
 
 
 
@@ -349,8 +349,8 @@
 
                                 </tr>
 
-                                @endforeach
 
+                                @endforeach
                                 @endforeach
 
                                 </tbody>

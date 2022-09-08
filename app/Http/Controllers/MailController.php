@@ -12,7 +12,7 @@ class MailController extends Controller {
         $data = array('name'=>"Abdul production");
 
         Mail::send(['text'=>'mail'], $data, function($message) {
-            $message->to('kyates@mddistributors.com', 'V Stokely')->subject
+            $message->to('ayamout1@gmail.com', 'Ayamout')->subject
             (' Testing Mail');
             $message->from('vendorlist@mddistributors.com','production abdul');
         });

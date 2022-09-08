@@ -16,9 +16,10 @@ use Illuminate\Database\Eloquent\Builder;
 class MainfilterController extends Controller
 {
     //s
+
     public function index()
     {
-        $vendors = Vendor::orderby('name','ASC')->get();
+        $vendors = Vendor::orderBy('name','ASC')->get();
         $pdatas = Product::all();
         $cdatas = Contact::all();
         $bdatas = Brand::all();
@@ -62,7 +63,7 @@ class MainfilterController extends Controller
     public function listvp()
     {
 
-        $vpnumbers = Vendor::with('vendorVendorNumbers','vendorPreludeNumbers')->get();
+        $vpnumbers = Vendor::has('vendorVendorNumbers','vendorPreludeNumbers')->get();
 
         return view('admin.vendorlookup.vendorpreludenumber', compact('vpnumbers'));
 
