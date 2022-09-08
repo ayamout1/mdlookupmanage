@@ -27,6 +27,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::get('mainfilter/index', [\App\Http\Controllers\Admin\MainfilterController::class, 'index'])->name('mainfilter.index');
         Route::get('mainfilter/reportprelude', [\App\Http\Controllers\Admin\MainfilterController::class, 'reportprelude'])->name('mainfilter.reportprelude');
         Route::get('mainfilter/reportvendornumbers', [\App\Http\Controllers\Admin\MainfilterController::class, 'reportvendornumbers'])->name('mainfilter.reportvendornumbers');
+        Route::get('mainfilter/listvp', [\App\Http\Controllers\Admin\MainfilterController::class, 'listvp'])->name('mainfilter.listvp');
         Route::post('mainfilter/getVendors', [\App\Http\Controllers\Admin\MainfilterController::class, 'getVendors'])->name('mainfilter.getVendors');
     });
 

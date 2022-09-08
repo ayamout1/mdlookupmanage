@@ -59,6 +59,14 @@ class MainfilterController extends Controller
         return view('admin.vendorlookup.reportvendornumber', compact('vendornumbers'));
 
     }
+    public function listvp()
+    {
+
+        $vpnumbers = Vendor::with('vendorVendorNumbers','vendorPreludeNumbers')->get();
+
+        return view('admin.vendorlookup.vendorpreludenumber', compact('vpnumbers'));
+
+    }
 
     public function show()
     {
