@@ -22,14 +22,14 @@
                         @foreach($vpnumbers as $ven)
 
                                 <td><a class="" href="{{ route('admin.vendors.show',$ven->id) }}"  onMouseOver="this.style.color='red'" onMouseOut="this.style.color='blue'">{{ $ven->name }}</a></td>
-                                    @foreach($ven->vendorPreludeNumbers as $pnum)
 
-                                    <td>{{$pnum->number}}</td>
-                                    @endforeach
-                                    @foreach($ven->vendorVendorNumbers as $vnum)
 
-                                        <td>{{$vnum->number}}</td>
-                                    @endforeach
+                            <td>@foreach($ven->vendorPreludeNumbers as $pnum)<p>{{$pnum->number}}</p>@endforeach</td>
+
+
+
+                            <td>@foreach($ven->vendorVendorNumbers as $vnum)<p>{{$vnum->number}}</p> @endforeach</td>
+
 
 
 
