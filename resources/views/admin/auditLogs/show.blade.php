@@ -60,6 +60,7 @@
                             {{ trans('cruds.auditLog.fields.properties') }}
                         </th>
                         <td>
+
                             {{ $auditLog->properties }}
                         </td>
                     </tr>
