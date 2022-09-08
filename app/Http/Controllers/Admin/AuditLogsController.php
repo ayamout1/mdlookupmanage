@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AuditLog;
+use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,8 +16,9 @@ class AuditLogsController extends Controller
         abort_if(Gate::denies('audit_log_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $auditLogs = AuditLog::all();
+        $usernames = User::all();
 
-        return view('admin.auditLogs.index', compact('auditLogs'));
+        return view('admin.auditLogs.index', compact('auditLogs','usernames'));
     }
 
     public function show(AuditLog $auditLog)

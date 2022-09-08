@@ -27,7 +27,7 @@
                             {{ trans('cruds.auditLog.fields.subject_type') }}
                         </th>
                         <th>
-                            {{ trans('cruds.auditLog.fields.user_id') }}
+                           User
                         </th>
                         <th>
                             {{ trans('cruds.auditLog.fields.host') }}
@@ -59,7 +59,10 @@
                                 {{ $auditLog->subject_type ?? '' }}
                             </td>
                             <td>
-                                {{ $auditLog->user_id ?? '' }}
+                                @foreach($usernames as $username)
+                                @if($username->id == $auditLog->user_id ){{ $username->name ?? 'no user' }}
+                                @endif
+                                @endforeach
                             </td>
                             <td>
                                 {{ $auditLog->host ?? '' }}
@@ -94,7 +97,7 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-  
+
   $.extend(true, $.fn.dataTable.defaults, {
     orderCellsTop: true,
     order: [[ 1, 'desc' ]],
@@ -105,7 +108,7 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+
 })
 
 </script>
