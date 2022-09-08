@@ -646,14 +646,14 @@
                                                     @method('PUT')
                                                     <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
                                                     <input type="hidden" name="vendor_page" value="1">
-                                                    <button type="submit" class="btn btn-primary" class="khara d-none" >Edit</button>
+                                                    <button type="submit" class="btn btn-primary khara d-none">Edit</button>
                                                 </td></form>
                                             <form action="{{ route('admin.vendor-numbers.destroy',$vendornumber->id) }}" method="POST">
                                                 <td>@csrf
                                                     @method('DELETE')
                                                     <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
                                                     <input type="hidden" name="vendor_page" value="1">
-                                                    <button type="submit" class="btn btn-danger" class="khara d-none">Delete</button>
+                                                    <button type="submit" class="btn btn-danger khara d-none" >Delete</button>
                                                 </td></form>
                                         </tr>
                                         @endforeach
