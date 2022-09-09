@@ -43,6 +43,12 @@ class Address extends Model
         'deleted_at',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        Address::observe(new \App\Observers\AddressActionObserver());
+    }
+
     public function vendor()
     {
         return $this->belongsTo(Vendor::class, 'vendor_id');
