@@ -18,8 +18,11 @@ class AuditLogsController extends Controller
         $auditLogs = AuditLog::all();
         $usernames = User::all();
 
+
+
         return view('admin.auditLogs.index', compact('auditLogs','usernames'));
     }
+
 
     public function show(AuditLog $auditLog)
     {

@@ -14,7 +14,9 @@ trait Auditable
         });
 
         static::updated(function (Model $model) {
-            $model->attributes = array_merge($model->getChanges(), [$model->getOriginal()],['id' => $model->id]);
+            $model->attributes = array_merge($model->getChanges(),['id' => $model->id]);
+            $updatedfrom = $model->getOriginal();
+            $updatedto = $model->getChanges();
 
             self::audit('audit:updated', $model);
         });
@@ -22,6 +24,7 @@ trait Auditable
         static::deleted(function (Model $model) {
             self::audit('audit:deleted', $model);
         });
+
     }
 
     protected static function audit($description, $model)

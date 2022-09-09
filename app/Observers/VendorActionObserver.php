@@ -17,7 +17,7 @@ class VendorActionObserver
 
     public function updated(Vendor $model)
     {
-        $data  = ['action' => 'updated', 'model_name' => 'Vendor'];
+        $data  = array_merge([$model->getChanges()],[$model->getOriginal()],['action' => 'updated', 'model_name' => 'Vendor']);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataChangeEmailNotification($data));
     }
