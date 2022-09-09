@@ -41,6 +41,12 @@ class Warranty extends Model implements HasMedia
         'updated_at',
         'deleted_at',
     ];
+    public static function boot()
+    {
+        parent::boot();
+        Warranty::observe(new \App\Observers\WarrantyActionObserver());
+    }
+
 
     public function registerMediaConversions(Media $media = null): void
     {

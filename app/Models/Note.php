@@ -44,6 +44,12 @@ class Note extends Model implements HasMedia
         'updated_at',
         'deleted_at',
     ];
+    public static function boot()
+    {
+        parent::boot();
+        Note::observe(new \App\Observers\NoteActionObserver());
+    }
+
 
     public function registerMediaConversions(Media $media = null): void
     {
