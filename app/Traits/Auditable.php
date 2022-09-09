@@ -14,9 +14,10 @@ trait Auditable
         });
 
         static::updated(function (Model $model) {
-            $model->attributes = array_merge($model->getChanges(),['id' => $model->id]);
+
             $updatedfrom = $model->getOriginal();
             $updatedto = $model->getChanges();
+            $model->attributes = array_merge(['id' => $model->id, 'updatedfrom' => $updatedfrom, 'updatedto'=>$updatedto ]);
 
             self::audit('audit:updated', $model);
         });

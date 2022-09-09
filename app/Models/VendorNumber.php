@@ -33,6 +33,11 @@ class VendorNumber extends Model
         'updated_at',
         'deleted_at',
     ];
+    public static function boot()
+    {
+        parent::boot();
+        VendorNumber::observe(new \App\Observers\VendorNumberActionObserver());
+    }
 
     public function vendor()
     {

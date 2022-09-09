@@ -2,35 +2,35 @@
 
 namespace App\Observers;
 
-use App\Models\Vendor;
+use App\Models\PreludeNumber;
 use App\Notifications\DataChangeEmailNotification;
 use App\Notifications\DataCreateEmailNotification;
 use App\Notifications\DataDeleteEmailNotification;
 use Illuminate\Support\Facades\Notification;
 
-class VendorActionObserver
+class PreludeActionObserver
 {
-    public function created(Vendor $model)
+    public function created(PreludeNumber $model)
     {
-        $latest = Vendor::latest()->first('name');
-        $data  = array_merge(['action' => 'Created', 'model_name' => 'Vendor', 'name'=>$latest]);
+        $latest = PreludeNumber::latest()->first('number');
+        $data  = array_merge(['action' => 'Created', 'model_name' => 'Prelude Number', 'name'=>$latest]);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataCreateEmailNotification($data));
     }
 
-    public function updated(Vendor $model)
+    public function updated(PreludeNumber $model)
     {
         $change =$model->getChanges();
         $original =   $model->getOriginal() ;
-        $data  = array_merge(['change'=>$change['name'],'original'=>$original['name'],'action' => 'updated', 'model_name' => 'Vendor']);
+        $data  = array_merge(['change'=>$change['number'],'original'=>$original['number'],'action' => 'updated', 'model_name' => 'Prelude Number']);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataChangeEmailNotification($data));
     }
 
-    public function deleting(Vendor $model)
+    public function deleting(PreludeNumber $model)
     {
         $number = $model->getOriginal();
-        $data  = array_merge(['name'=>$number['name'],'action' => 'Deleted', 'model_name' => 'Vendor']);
+        $data  = array_merge(['name'=>$number['number'],'action' => 'Deleted', 'model_name' => 'Prelude Number']);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataDeleteEmailNotification($data));
     }

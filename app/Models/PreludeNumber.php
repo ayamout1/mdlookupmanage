@@ -34,6 +34,12 @@ class PreludeNumber extends Model
         'deleted_at',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        PreludeNumber::observe(new \App\Observers\PreludeActionObserver());
+    }
+
     public function vendor()
     {
         return $this->belongsTo(Vendor::class, 'vendor_id');

@@ -32,7 +32,7 @@ class DataDeleteEmailNotification extends Notification
             ->subject(config('app.name') . ': entry  has been deleted in ' . $this->data['model_name'])
             ->greeting('Hi,')
             ->line('we would like to inform you that entry has been ' . $this->data['action'] . '  in ' . $this->data['model_name'])
-            ->line('Deleted '. $this->data['model_name'].' = '.$this->data['0']['name'])
+            ->line('Deleted '. $this->data['model_name'].' = '.$this->data['name'])
             ->line('Thank you')
             ->line(config('app.name') . ' Team')
             ->salutation(' ');
