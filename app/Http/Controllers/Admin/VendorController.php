@@ -84,7 +84,8 @@ class VendorController extends Controller
 
 
 
-              $vid = Vendor::create(['name'=>$request->Vname,
+              $vid = Vendor::create(
+                  ['name'=>$request->name,
                   'ranking'=>$request->ranking
               ]);
 

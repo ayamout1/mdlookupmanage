@@ -4,15 +4,18 @@ namespace App\Observers;
 
 use App\Models\Vendor;
 use App\Notifications\DataChangeEmailNotification;
+use App\Notifications\DataCreateEmailNotification;
+use App\Notifications\DataDeleteEmailNotification;
 use Illuminate\Support\Facades\Notification;
 
 class VendorActionObserver
 {
     public function created(Vendor $model)
     {
-        $data  = ['action' => 'created', 'model_name' => 'Vendor'];
+        $latestvendor = Vendor::latest()->first('name');
+        $data  = array_merge(['action' => 'Created', 'model_name' => 'Vendor', 'name'=>$latestvendor]);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
-        Notification::send($users, new DataChangeEmailNotification($data));
+        Notification::send($users, new DataCreateEmailNotification($data));
     }
 
     public function updated(Vendor $model)
@@ -24,8 +27,8 @@ class VendorActionObserver
 
     public function deleting(Vendor $model)
     {
-        $data  = ['action' => 'deleted', 'model_name' => 'Vendor'];
+        $data  = array_merge([$model->getOriginal()],['action' => 'Deleted', 'model_name' => 'Vendor']);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
-        Notification::send($users, new DataChangeEmailNotification($data));
+        Notification::send($users, new DataDeleteEmailNotification($data));
     }
 }
