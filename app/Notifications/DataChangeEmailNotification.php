@@ -32,8 +32,9 @@ class DataChangeEmailNotification extends Notification
             ->subject(config('app.name') . ': entry ' . $this->data['action'] . ' in ' . $this->data['model_name'])
             ->greeting('Hi,')
             ->line('we would like to inform you that entry has been ' . $this->data['action'] . '  in ' . $this->data['model_name'])
-            ->line('New Value = '.$this->data['change'])
-            ->line('Old Value = '.$this->data['original'])
+            ->line('New Values = '.$this->data['change'])
+            ->line('Old Values = '.$this->data['original'])
+            ->line('Vendor = '.$this->data['vendor'])
             ->line('Thank you')
             ->line(config('app.name') . ' Team')
             ->salutation(' ');

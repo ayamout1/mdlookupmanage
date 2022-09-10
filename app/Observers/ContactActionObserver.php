@@ -3,23 +3,24 @@
 namespace App\Observers;
 
 use App\Models\Address;
+use App\Models\Contact;
 use App\Models\Vendor;
 use App\Notifications\DataChangeEmailNotification;
 use App\Notifications\DataCreateEmailNotification;
 use App\Notifications\DataDeleteEmailNotification;
 use Illuminate\Support\Facades\Notification;
 
-class AddressActionObserver
+class ContactActionObserver
 {
-    public function created(Address $model)
+    public function created(Contact $model)
     {
-        $latest = Address::latest()->first('address');
-        $data  = array_merge(['action' => 'Created', 'model_name' => 'Locations', 'name'=>$latest]);
+        $latest = Contact::latest()->first('address');
+        $data  = array_merge(['action' => 'Created', 'model_name' => 'Contact', 'name'=>$latest]);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataCreateEmailNotification($data));
     }
 
-    public function updated(Address $model)
+    public function updated(Contact $model)
     {
         $change =$model->getChanges();
         $original =   $model->getOriginal();
@@ -30,17 +31,17 @@ class AddressActionObserver
         $vendorchangeid = $original['vendor_id'];
         $vendorname = Vendor::where('id',$vendorchangeid)->get('name');
 
-        $data  = array_merge(['change'=>$changestring,'original'=>$originalstring,'action' => 'updated', 'model_name' => 'Locations', 'vendor'=> $vendorname]);
+        $data  = array_merge(['change'=>$changestring,'original'=>$originalstring,'action' => 'updated', 'model_name' => 'Contact', 'vendor'=> $vendorname]);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataChangeEmailNotification($data));
     }
 
-    public function deleting(Address $model)
+    public function deleting(Contact $model)
     {
         $original = $model->getOriginal();
         $originalstring =implode(", ",$original);
 
-        $data  = array_merge(['name'=>$originalstring,'action' => 'Deleted', 'model_name' => 'Address']);
+        $data  = array_merge(['name'=>$originalstring,'action' => 'Deleted', 'model_name' => 'Contact']);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataDeleteEmailNotification($data));
     }

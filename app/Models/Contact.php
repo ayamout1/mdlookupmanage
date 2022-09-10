@@ -47,6 +47,11 @@ class Contact extends Model
         'updated_at',
         'deleted_at',
     ];
+    public static function boot()
+    {
+        parent::boot();
+        Contact::observe(new \App\Observers\ContactActionObserver());
+    }
 
     public function vendor()
     {

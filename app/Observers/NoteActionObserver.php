@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Note;
+use App\Models\Vendor;
 use App\Notifications\DataChangeEmailNotification;
 use App\Notifications\DataCreateEmailNotification;
 use App\Notifications\DataDeleteEmailNotification;
@@ -32,16 +33,30 @@ class NoteActionObserver
         $pdf = $model->getDirty();
 
         if(!empty($pdf['updatedfrom']['note'])){
-            $change = $model->getChanges();
-            $original =   $model->getOriginal() ;
-            $data  = array_merge(['change'=>$change['note'],'original'=>$original['note'],'action' => 'updated', 'model_name' => 'PDF']);
+            $change =$model->getChanges();
+            $original =   $model->getOriginal();
+
+            $y = count($change)-1;
+            $changestring =  implode (", ", $change);
+            $originalstring =implode(", ",$original);
+            $vendorchangeid = $original['vendor_id'];
+            $vendorname = Vendor::where('id',$vendorchangeid)->get('name');
+
+            $data  = array_merge(['change'=>$changestring,'original'=>$originalstring,'action' => 'updated', 'model_name' => 'PDFS', 'vendor'=> $vendorname]);
             $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
             Notification::send($users, new DataChangeEmailNotification($data));
 
         }elseif(isNull($pdf['updatedfrom']['title'])){
-        $change = $model->getChanges();
-        $original =   $model->getOriginal() ;
-        $data  = array_merge(['change'=>$change['title'],'original'=>$original['title'],'action' => 'updated', 'model_name' => 'Note']);
+            $change =$model->getChanges();
+            $original =   $model->getOriginal();
+
+            $y = count($change)-1;
+            $changestring =  implode (", ", $change);
+            $originalstring =implode(", ",$original);
+            $vendorchangeid = $original['vendor_id'];
+            $vendorname = Vendor::where('id',$vendorchangeid)->get('name');
+
+            $data  = array_merge(['change'=>$changestring,'original'=>$originalstring,'action' => 'updated', 'model_name' => 'Notes', 'vendor'=> $vendorname]);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataChangeEmailNotification($data));
         }
@@ -49,16 +64,24 @@ class NoteActionObserver
 
     public function deleting(Note $model)
     {
+        $original = $model->getOriginal();
+        $originalstring =implode(", ",$original);
+
+
         $number = $model->getOriginal();
 
         if(!empty($number['note'])){
-        $data  = array_merge(['name'=>$number['note'],'action' => 'Deleted', 'model_name' => 'PDF']);
+            $data  = array_merge(['name'=>$originalstring,'action' => 'Deleted', 'model_name' => 'Note']);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataDeleteEmailNotification($data));
         }
 
     elseif(!empty($number['title'])){
-        $data  = array_merge(['name'=>$number['title'],'action' => 'Deleted', 'model_name' => 'Note']);
+        $original = $model->getOriginal();
+        $originalstring =implode(", ",$original);
+
+
+        $data  = array_merge(['name'=>$originalstring,'action' => 'Deleted', 'model_name' => 'Note']);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataDeleteEmailNotification($data));
         }

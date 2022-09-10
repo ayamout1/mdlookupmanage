@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\Vendor;
 use App\Models\VendorNumber;
 use App\Notifications\DataChangeEmailNotification;
 use App\Notifications\DataCreateEmailNotification;
@@ -21,16 +22,25 @@ class VendorNumberActionObserver
     public function updated(VendorNumber $model)
     {
         $change =$model->getChanges();
-        $original =   $model->getOriginal() ;
-        $data  = array_merge(['change'=>$change['number'],'original'=>$original['number'],'action' => 'updated', 'model_name' => 'VendorNumber']);
+        $original =   $model->getOriginal();
+
+        $y = count($change)-1;
+        $changestring =  implode (", ", $change);
+        $originalstring =implode(", ",$original);
+        $vendorchangeid = $original['vendor_id'];
+        $vendorname = Vendor::where('id',$vendorchangeid)->get('name');
+
+        $data  = array_merge(['change'=>$changestring,'original'=>$originalstring,'action' => 'updated', 'model_name' => 'Vendor Number', 'vendor'=> $vendorname]);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataChangeEmailNotification($data));
     }
 
     public function deleting(VendorNumber $model)
     {
-        $name = $model->getOriginal();
-        $data  = array_merge(['name'=>$name['number'],'action' => 'Deleted', 'model_name' => 'VendorNumber']);
+        $original = $model->getOriginal();
+        $originalstring =implode(", ",$original);
+
+        $data  = array_merge(['name'=>$originalstring,'action' => 'Deleted', 'model_name' => 'Vendor Number']);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataDeleteEmailNotification($data));
     }

@@ -21,16 +21,25 @@ class VendorActionObserver
     public function updated(Vendor $model)
     {
         $change =$model->getChanges();
-        $original =   $model->getOriginal() ;
-        $data  = array_merge(['change'=>$change['name'],'original'=>$original['name'],'action' => 'updated', 'model_name' => 'Vendor']);
+        $original =   $model->getOriginal();
+
+        $y = count($change)-1;
+        $changestring =  implode (", ", $change);
+        $originalstring =implode(", ",$original);
+        $vendorchangeid = $original['vendor_id'];
+        $vendorname = Vendor::where('id',$vendorchangeid)->get('name');
+
+        $data  = array_merge(['change'=>$changestring,'original'=>$originalstring,'action' => 'updated', 'model_name' => 'Vendor', 'vendor'=> $vendorname]);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataChangeEmailNotification($data));
     }
 
     public function deleting(Vendor $model)
     {
-        $number = $model->getOriginal();
-        $data  = array_merge(['name'=>$number['name'],'action' => 'Deleted', 'model_name' => 'Vendor']);
+        $original = $model->getOriginal();
+        $originalstring =implode(", ",$original);
+
+        $data  = array_merge(['name'=>$originalstring,'action' => 'Deleted', 'model_name' => 'Vendor']);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataDeleteEmailNotification($data));
     }
