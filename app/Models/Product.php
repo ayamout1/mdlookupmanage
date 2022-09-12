@@ -36,6 +36,11 @@ class Product extends Model
         'updated_at',
         'deleted_at',
     ];
+    public static function boot()
+    {
+        parent::boot();
+        Product::observe(new \App\Observers\ProductActionObserver());
+    }
 
     public function vendors()
     {

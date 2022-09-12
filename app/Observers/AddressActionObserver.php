@@ -13,7 +13,7 @@ class AddressActionObserver
 {
     public function created(Address $model)
     {
-        $latest = Address::latest()->first('address');
+        $latest = Address::latest()->first();
         $data  = array_merge(['action' => 'Created', 'model_name' => 'Locations', 'name'=>$latest]);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataCreateEmailNotification($data));

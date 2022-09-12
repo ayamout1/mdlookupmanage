@@ -32,6 +32,11 @@ class Engine extends Model
         'updated_at',
         'deleted_at',
     ];
+    public static function boot()
+    {
+        parent::boot();
+        Engine::observe(new \App\Observers\EngineActionObserver());
+    }
 
     public function vendors()
     {

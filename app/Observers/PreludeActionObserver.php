@@ -13,7 +13,7 @@ class PreludeActionObserver
 {
     public function created(PreludeNumber $model)
     {
-        $latest = PreludeNumber::latest()->first('number');
+        $latest = PreludeNumber::latest()->first();
         $data  = array_merge(['action' => 'Created', 'model_name' => 'Prelude Number', 'name'=>$latest]);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataCreateEmailNotification($data));

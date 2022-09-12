@@ -32,6 +32,11 @@ class Service extends Model
         'updated_at',
         'deleted_at',
     ];
+    public static function boot()
+    {
+        parent::boot();
+        Service::observe(new \App\Observers\ServiceActionObserver());
+    }
 
     public function vendors()
     {

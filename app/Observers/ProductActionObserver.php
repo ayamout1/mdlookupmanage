@@ -2,42 +2,41 @@
 
 namespace App\Observers;
 
-use App\Models\User;
+use App\Models\Vendor;
+use App\Models\Product;
 use App\Notifications\DataChangeEmailNotification;
 use App\Notifications\DataCreateEmailNotification;
 use App\Notifications\DataDeleteEmailNotification;
 use Illuminate\Support\Facades\Notification;
 
-class UserActionObserver
+class ProductActionObserver
 {
-    public function created(User $model)
+    public function created(Product $model)
     {
-        $latestuser = User::latest()->first();
-        $data  = array_merge(['action' => 'Created', 'model_name' => 'User', 'name'=>$latestuser,'vendor'=>'This is a User Action']);
+        $latest = Product::latest()->first();
+        $data  = array_merge(['action' => 'Created', 'model_name' => 'Product', 'name'=>$latest]);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataCreateEmailNotification($data));
     }
 
-    public function updated(User $model)
+    public function updated(Product $model)
     {
         $change =$model->getChanges();
         $original =   $model->getOriginal();
 
-        $y = count($change)-1;
         $changestring =  implode (", ", $change);
         $originalstring =implode(", ",$original);
 
-        $data  = array_merge(['change'=>$changestring,'original'=>$originalstring,'action' => 'updated', 'model_name' => 'User', 'vendor'=> 'This is a User update']);
+
+        $data  = array_merge(['change'=>$changestring,'original'=>$originalstring,'action' => 'updated', 'model_name'=> 'Product']);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataChangeEmailNotification($data));
     }
 
-    public function deleting(User $model)
+    public function deleting(Product $model)
     {
-        $original = $model->getOriginal();
-        $originalstring =implode(", ",$original);
-
-        $data  = array_merge(['name'=>$originalstring,'action' => 'Deleted', 'model_name' => 'User']);
+        $number = $model->getOriginal();
+        $data  = array_merge(['name'=>$number['warranty'],'action' => 'Deleted', 'model_name' => 'Product']);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataDeleteEmailNotification($data));
     }

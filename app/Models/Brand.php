@@ -32,6 +32,11 @@ class Brand extends Model
         'updated_at',
         'deleted_at',
     ];
+    public static function boot()
+    {
+        parent::boot();
+        Brand::observe(new \App\Observers\BrandActionObserver());
+    }
 
     public function vendors()
     {

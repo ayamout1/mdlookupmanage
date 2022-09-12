@@ -13,7 +13,7 @@ class VendorNumberActionObserver
 {
     public function created(VendorNumber $model)
     {
-        $latest = VendorNumber::latest()->first('number');
+        $latest = VendorNumber::latest()->first();
         $data  = array_merge(['action' => 'Created', 'model_name' => 'VendorNumber', 'name'=>$latest]);
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataCreateEmailNotification($data));
