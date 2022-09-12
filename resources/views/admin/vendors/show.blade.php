@@ -1254,24 +1254,24 @@
 
                 })
             .done(function () { location.reload()})});
-        $('#addressdelete').submit(function(e) {
+{{--        $('#addressdelete').submit(function(e) {--}}
 
-            e.preventDefault();
+{{--            e.preventDefault();--}}
 
-//
-// var address = $("address").val();
-// var city = $("city").val();
-// var state = $("state").val();
-// var zipcode = $("zipcode").val();
-// var vendor_id = $("vendor_id").val();
-//
-            $.ajax({
-                headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}"},
-                method: 'POST',
-                url: config.url,
-                data: { id: id, _method: 'DELETE' }})
 
-                .done(function () { location.reload() })});
+{{--var address = $("address").val();--}}
+{{--var city = $("city").val();--}}
+{{--var state = $("state").val();--}}
+{{--var zipcode = $("zipcode").val();--}}
+{{--var vendor_id = $("vendor_id").val();--}}
+
+{{--            $.ajax({--}}
+{{--                headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}"},--}}
+{{--                method: 'POST',--}}
+{{--                url: config.url,--}}
+{{--                data: { id: id, _method: 'DELETE' }})--}}
+
+{{--                .done(function () { location.reload() })});--}}
 
         $('#contactForm').submit(function(e) {
 

@@ -40,4 +40,13 @@ class BrandActionObserver
         $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
         Notification::send($users, new DataDeleteEmailNotification($data));
     }
+
+public function assignsla(Vendor $model){
+    $change =$model->getChanges();
+    $changestring =  implode (", ", $change);
+    $data  = array_merge(['change'=>$changestring,'action' => 'Brand Assingned to Vendor', 'model_name'=> 'Brand']);
+    $users = \App\Models\User::whereHas('roles', function ($q) { return $q->where('title', 'Admin'); })->get();
+    Notification::send($users, new DataDeleteEmailNotification($data));
+}
+
 }

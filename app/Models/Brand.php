@@ -40,7 +40,7 @@ class Brand extends Model
 
     public function vendors()
     {
-        return $this->belongsToMany(Vendor::class);
+        return $this->belongsToMany(Vendor::class)->using(Brand_Vendor::class);
     }
 
     protected function serializeDate(DateTimeInterface $date)
