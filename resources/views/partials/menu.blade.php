@@ -62,7 +62,37 @@
 
                         </i>
                         <p>
-                            Listing Vendor and Prelude Numbers
+                            Vendor and Prelude Numbers
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route("admin.mainfilter.novnop") }}" class="nav-link ">
+                        <i class="fa-fw nav-icon fas fa-server">
+
+                        </i>
+                        <p>
+                            Vendors no prelude and no vendor numbers
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route("admin.mainfilter.listnopwithv") }}" class="nav-link ">
+                        <i class="fa-fw nav-icon fas fa-server">
+
+                        </i>
+                        <p>
+                            Vendors no prelude but have vendor numbers
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route("admin.mainfilter.listnovwithp") }}" class="nav-link ">
+                        <i class="fa-fw nav-icon fas fa-server">
+
+                        </i>
+                        <p>
+                            Vendors prelude but no vendor numbers
                         </p>
                     </a>
                 </li>

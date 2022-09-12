@@ -63,13 +63,35 @@ class MainfilterController extends Controller
     public function listvp()
     {
 
-        $vpnumbers = Vendor::has('vendorVendorNumbers','vendorPreludeNumbers')->get();
+        $vpnumbers = Vendor::wherehas('vendorVendorNumbers')->wherehas('vendorPreludeNumbers')->get();
 
         return view('admin.vendorlookup.vendorpreludenumber', compact('vpnumbers'));
 
     }
+    public function listnovwithp()
+    {
 
-    public function show()
+        $vpnumbers = Vendor::doesntHave('vendorVendorNumbers')->wherehas('vendorPreludeNumbers')->get();
+
+        return view('admin.vendorlookup.listnovwithp', compact('vpnumbers'));
+
+    }
+    public function listnopwithv()
+    {
+
+        $vpnumbers = Vendor::wherehas('vendorVendorNumbers')->doesntHave('vendorPreludeNumbers')->get();
+
+        return view('admin.vendorlookup.listnopwithv', compact('vpnumbers'));
+    }
+    public function novnop()
+    {
+
+        $vpnumbers = Vendor::doesntHave('vendorVendorNumbers')->doesntHave('vendorPreludeNumbers')->get();
+
+        return view('admin.vendorlookup.novnop', compact('vpnumbers'));
+    }
+
+        public function show()
     {
         $vendors = Vendor::orderby('name','ASC')->get();
         $pdatas = Product::all();
