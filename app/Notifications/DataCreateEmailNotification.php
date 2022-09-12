@@ -29,7 +29,7 @@ class DataCreateEmailNotification extends Notification
     public function getMessage()
     {
         return (new MailMessage())
-            ->subject(config('app.name') . ': entry  has been Created in ' . $this->data['model_name'])
+            ->subject(config('app.name') . ': entry has been Created in ' . $this->data['model_name'])
             ->greeting('Hi,')
             ->line('we would like to inform you that entry has been ' . $this->data['action'] . '  in ' . $this->data['model_name'])
             ->line('Created '. $this->data['model_name'].' = '.$this->data['name'])

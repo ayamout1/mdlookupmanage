@@ -72,22 +72,22 @@ class Vendor extends Model
 
     public function vendorBrands()
     {
-        return $this->belongsToMany(Brand::class);
+        return $this->belongsToMany(Brand::class)->using(Brand_Vendor::class);
     }
 
     public function vendorEngines()
     {
-        return $this->belongsToMany(Engine::class);
+        return $this->belongsToMany(Engine::class)->using(Engine_Vendor::class);
     }
 
     public function vendorProducts()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)->using(Product_Vendor::class);
     }
 
     public function vendorServices()
     {
-        return $this->belongsToMany(Service::class);
+        return $this->belongsToMany(Service::class)->using(Service_Vendor::class);;
     }
 
     protected function serializeDate(DateTimeInterface $date)
