@@ -207,7 +207,7 @@
                                     <div class="form-group">
                                         <strong>Contact Name:</strong>
 
-                                        <input type="text" class="form-control" id="validationCustom01" name="name" placeholder="Name" required />
+                                        <input type="text" class="form-control" id="validationCustom01" name="cname" placeholder="Name" required />
                                         <div class="invalid-feedback">Name Required</div>
                                         <div class="valid-feedback">Looks good!</div>
                                     </div>
