@@ -85,13 +85,13 @@ class VendorController extends Controller
 
 
               $vid = Vendor::create(
-                  ['vname'=>$request->name,
+                  ['vname'=>$request->vname,
                   'ranking'=>$request->ranking
               ]);
 
               $lastid = $vid->id;
 
-              Contact::create(['cname'=>$request->name,
+              Contact::create(['cname'=>$request->cname,
                   'website'=>$request->website,
                   'email'=>$request->email,
                   'phone'=>$request->phone,
