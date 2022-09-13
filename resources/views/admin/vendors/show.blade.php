@@ -156,8 +156,8 @@
                                                 <th>Ext</th>
                                                 <th>Email</th>
 {{--                                                <th>Website</th>--}}
-                                                <th class="khara d-none">Edit Contact</th>
-                                                @can('delete')  <th class="khara d-none">Delete Contact</th>@endcan
+                                                <th class="khara d-none">Edit</th>
+                                                @can('delete')  <th class="khara d-none">Delete</th>@endcan
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -176,7 +176,7 @@
 
                                                             <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
                                                             <input type="hidden" name="vendor_page" value="1">
-                                                           <button type="submit" class="btn btn-danger">Edit Contact</button>
+                                                           <button type="submit" class="btn btn-danger">Edit</button>
                                                         </td></form>
 {{--                                                    <form action="{{ route('admin.contacts.destroy',$cdata->id) }}" id="contactdelete" method="POST">--}}
 
@@ -328,7 +328,7 @@
 
                                                             <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
                                                             <input type="hidden" name="vendor_page" value="1">
-                                                            <button type="submit" class="btn btn-danger">Edit Contact</button>
+                                                            <button type="submit" class="btn btn-danger">Edit</button>
                                                         </td></form>
                                                     <form action="{{ route('admin.contacts.destroy',$cdata->id) }}" id="contactdelete" method="POST">
 
@@ -748,7 +748,7 @@
                                                 <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
 
                                                 <tr>
-                                                    <td class="khara d-none"><select class="form-select" name="engine_id" aria-label="Default select example">
+                                                    <td class="khara d-none"><select class="form-control select2" name="engine_id" aria-label="Default select example">
                                                             <option selected="">ADD Engine</option>
 
                                                             @foreach($edatas1 as $edata)
@@ -813,7 +813,7 @@
                                         <td class="khara d-none">                            <form method="POST">
                                                 <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
 
-                                                <select class="form-select" name="product_id" aria-label="Default select example">
+                                                <select class="form-control select2" name="product_id" aria-label="Default select example">
                                                     <option selected="">Add Product</option>
 
                                                     @foreach($pdatas1 as $pdata)
@@ -879,7 +879,8 @@
                                         <form method="POST">
                                             <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
                                             <tr>
-                                            <td class="khara d-none"><select class="form-select" name="brand_id" aria-label="Default select example">
+                                            <td class="khara d-none">
+                                                <select class="form-control select2" name="brand_id" aria-label="Default select example">
                                                 <option selected="">Add Brand</option>
 
                                                 @foreach($bdatas1 as $bdata)
@@ -942,7 +943,8 @@
                                         <form method="POST">
                                             <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
 <tr>
-                                       <td class="khara d-none">     <select class="form-select" name="service_id" aria-label="Default select example">
+                                       <td class="khara d-none">
+                                           <select class="form-control select2" name="service_id" aria-label="Default select example">
                                                 <option selected="">Select Service</option>
 
                                                 @foreach($sdatas1 as $sdata)
