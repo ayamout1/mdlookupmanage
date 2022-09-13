@@ -184,7 +184,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>Vendor Name:</strong>
-                                    <input type="text" name="vname" class="form-control" required  placeholder="Vendor Name">
+                                    <input type="text" name="name" class="form-control" required  placeholder="Vendor Name">
                                     <div class="invalid-feedback">Vendor Name Required</div>
                                     <div class="valid-feedback">Looks good!</div>
                                 </div>

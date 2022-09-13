@@ -78,20 +78,20 @@ class VendorController extends Controller
 
     public function store(StoreVendorRequest $request)
           {
+
               $request->validate([
                   'name' => 'required',
               ]);
 
 
-
               $vid = Vendor::create(
-                  ['vname'=>$request->vname,
+                  ['name'=>$request->name,
                   'ranking'=>$request->ranking
               ]);
 
               $lastid = $vid->id;
 
-              Contact::create(['cname'=>$request->cname,
+              Contact::create(['name'=>$request->cname,
                   'website'=>$request->website,
                   'email'=>$request->email,
                   'phone'=>$request->phone,
@@ -99,7 +99,7 @@ class VendorController extends Controller
                   'address'=>$request->address,
                   'city'=>$request->city,
                   'state'=>$request->state,
-                  'zip'=>$request->zip,
+                  'zip'=>$request->zipcode,
                   'vendor_id'=>$lastid
               ]);
 
