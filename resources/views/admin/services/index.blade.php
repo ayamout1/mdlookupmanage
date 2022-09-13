@@ -44,12 +44,14 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($vendors as $key => $item)
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
+
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+{{--                        <select class="search">--}}
+{{--                            <option value>{{ trans('global.all') }}</option>--}}
+{{--                            @foreach($vendors as $key => $item)--}}
+{{--                                <option value="{{ $item->name }}">{{ $item->name }}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
                     </td>
                     <td>
                     </td>
@@ -120,7 +122,7 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+
 let visibleColumnsIndexes = null;
 $('.datatable thead').on('input', '.search', function () {
       let strict = $(this).attr('strict') || false
