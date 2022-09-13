@@ -37,6 +37,7 @@ class DataChangeEmailNotification extends Notification
             ->line('Vendor = '.$this->data['vendor'])
             ->line('Thank you')
             ->line(config('app.name') . ' Team')
+            ->line('www.mdvendorlist.com')
             ->salutation(' ');
     }
 }

@@ -35,6 +35,7 @@ class DataCreateEmailNotification extends Notification
             ->line('Created '. $this->data['model_name'].' = '.$this->data['name'])
             ->line('Thank you')
             ->line(config('app.name') . ' Team')
+            ->line('www.mdvendorlist.com')
             ->salutation(' ');
     }
 }
