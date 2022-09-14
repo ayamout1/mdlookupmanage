@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyContactRequest;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
+use App\Models\Address;
 use App\Models\Contact;
 use App\Models\Vendor;
 use Gate;
@@ -116,6 +117,7 @@ class ContactController extends Controller
         ]);
 
 
+
         return Response()->json();
 
 
@@ -123,6 +125,18 @@ class ContactController extends Controller
     public function store(StoreContactRequest $request)
     {
         $contact = Contact::create($request->all());
+
+
+        Address::Create([
+            'contact' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'address' => $request->address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'zipcode' => $request->zipcode,
+            'vendor_id' => $request->vendor_id
+        ]);
 
         return back();
     }
