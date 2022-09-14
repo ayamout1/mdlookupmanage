@@ -7,6 +7,7 @@ use App\Http\Requests\MassDestroyAddressRequest;
 use App\Http\Requests\StoreAddressRequest;
 use App\Http\Requests\UpdateAddressRequest;
 use App\Models\Address;
+use App\Models\Contact;
 use App\Models\Vendor;
 use Gate;
 use Illuminate\Http\Request;
@@ -183,5 +184,13 @@ class AddressController extends Controller
         Address::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function contacttoaddress()
+    {
+        $doc = Contact::all();
+        $newdoc = $doc->replicate(['id', 'website','name']);
+dd($newdoc);
+
     }
 }

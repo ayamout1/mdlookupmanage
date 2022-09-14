@@ -313,33 +313,33 @@
 
                                                 </tr>
                                             @endforeach
-                                            @foreach($cdatas as $cdata)
-                                                <tr>
-                                                    <td>{{$cdata->city}}</td>
+{{--                                            @foreach($cdatas as $cdata)--}}
+{{--                                                <tr>--}}
+{{--                                                    <td>{{$cdata->city}}</td>--}}
 {{--                                                    <td>{{ $cdata->name  ?? 'no name on file'}}</td>--}}
 {{--                                                    <td><a href="tel{{ $cdata->phone  ?? 'no contact'}}">{{ $cdata->phone  ?? 'no phone number on file'}}</a></td>--}}
 {{--                                                    <td><a href="mailto: {{ $cdata->email}} ">{{ $cdata->email  ?? 'no email on file'}}</a></td>--}}
-                                                    <td><a href="http://maps.google.com/?q={{ $cdata->address.', '.$cdata->city.', '.$cdata->state.', '.$cdata->zipcode  ?? 'no address on file'}}" target="_blank">{{ $cdata->address.', '.$cdata->city.', '.$cdata->state.',  '.$cdata->zipcode  ?? 'no address onn file'}}</a></td>
+{{--                                                    <td><a href="http://maps.google.com/?q={{ $cdata->address.', '.$cdata->city.', '.$cdata->state.', '.$cdata->zipcode  ?? 'no address on file'}}" target="_blank">{{ $cdata->address.', '.$cdata->city.', '.$cdata->state.',  '.$cdata->zipcode  ?? 'no address onn file'}}</a></td>--}}
 {{--                                                                                                        <td><a href="{{ $cdata->website}}">{{ $cdata->website ?? 'no website on file'}}</a></td>--}}
 {{--                                                                                                        <td class="khara d-none">  <a class="popup-form btn btn-primary" href="{{ route('admin.contacts.edit',$cdata->id) }} ">Edit Contact</a></td>--}}
-                                                    <form action="{{ route('admin.contacts.edit',$cdata->id) }}" id="editcontact" method="GET">
+{{--                                                    <form action="{{ route('admin.contacts.edit',$cdata->id) }}" id="editcontact" method="GET">--}}
 
-                                                        <td class="khara d-none">@csrf
+{{--                                                        <td class="khara d-none">@csrf--}}
 
-                                                            <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
-                                                            <input type="hidden" name="vendor_page" value="1">
-                                                            <button type="submit" class="btn btn-danger">Edit</button>
-                                                        </td></form>
-                                                    <form action="{{ route('admin.contacts.destroy',$cdata->id) }}" id="contactdelete" method="POST">
+{{--                                                            <input type="hidden" name="vendor_id" value="{{$vendor->id}}">--}}
+{{--                                                            <input type="hidden" name="vendor_page" value="1">--}}
+{{--                                                            <button type="submit" class="btn btn-danger">Edit</button>--}}
+{{--                                                        </td></form>--}}
+{{--                                                    <form action="{{ route('admin.contacts.destroy',$cdata->id) }}" id="contactdelete" method="POST">--}}
 
-                                                        <td class="khara d-none">@csrf
-                                                            @method('DELETE')
-                                                            <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
-                                                            <input type="hidden" name="vendor_page" value="1">
-                                                            @can('delete')  <button type="submit" class="btn btn-danger">Delete Contact</button>@endcan
-                                                        </td></form>
-                                                </tr>
-                                            @endforeach
+{{--                                                        <td class="khara d-none">@csrf--}}
+{{--                                                            @method('DELETE')--}}
+{{--                                                            <input type="hidden" name="vendor_id" value="{{$vendor->id}}">--}}
+{{--                                                            <input type="hidden" name="vendor_page" value="1">--}}
+{{--                                                            @can('delete')  <button type="submit" class="btn btn-danger">Delete Contact</button>@endcan--}}
+{{--                                                        </td></form>--}}
+{{--                                                </tr>--}}
+{{--                                            @endforeach--}}
                                             </tbody>
                                         </table>
        <div class="khara d-none"> <button class="btn btn-primary" onclick="locationadd()" id="addloc">Add Location</button></div>

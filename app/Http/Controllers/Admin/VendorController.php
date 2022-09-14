@@ -103,6 +103,17 @@ class VendorController extends Controller
                   'vendor_id'=>$lastid
               ]);
 
+              Address::create(['contact'=>$request->cname,
+                  'website'=>$request->website,
+                  'phone'=>$request->phone,
+                  'email'=>$request->email,
+                  'address'=>$request->address,
+                  'city'=>$request->city,
+                  'state'=>$request->state,
+                  'zip'=>$request->zipcode,
+                  'vendor_id'=>$lastid
+              ]);
+
 
               if ($request->mpage = 1){
                   return redirect()->route('admin.vendors.show',$lastid)
