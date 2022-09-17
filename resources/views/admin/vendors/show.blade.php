@@ -178,14 +178,15 @@
                                                             <input type="hidden" name="vendor_page" value="1">
                                                            <button type="submit" class="btn btn-danger">Edit</button>
                                                         </td></form>
-{{--                                                    <form action="{{ route('admin.contacts.destroy',$cdata->id) }}" id="contactdelete" method="POST">--}}
 
-{{--                                                        <td class="khara d-none">@csrf--}}
-{{--                                                            @method('DELETE')--}}
-{{--                                                            <input type="hidden" name="vendor_id" value="{{$vendor->id}}">--}}
-{{--                                                            <input type="hidden" name="vendor_page" value="1">--}}
-{{--                                                            @can('delete')  <button type="submit" class="btn btn-danger">Delete Contact</button>@endcan--}}
-{{--                                                        </td></form>--}}
+                                                    <form action="{{ route('admin.contacts.destroy',$cdata->id) }}" id="contactdelete" method="POST">
+
+                                                        <td class="khara d-none">@csrf
+                                                            @method('DELETE')
+                                                            <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
+                                                            <input type="hidden" name="vendor_page" value="1">
+                                                            @if ($loop->last)    @else<button type="submit" class="btn btn-danger">Delete Contact</button>@continue
+                                                        </td></form> @endif
                                                 </tr>
                                             @endforeach
 
@@ -1305,24 +1306,24 @@
 
                 })
             .done(function () { location.reload()})});
-        $('#contactdelete').submit(function(e) {
+{{--        $('#contactdelete').submit(function(e) {--}}
 
-            e.preventDefault();
+{{--            e.preventDefault();--}}
 
-//
-// var address = $("address").val();
-// var city = $("city").val();
-// var state = $("state").val();
-// var zipcode = $("zipcode").val();
-// var vendor_id = $("vendor_id").val();
-//
-            $.ajax({
-                headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}"},
-                method: 'POST',
-                url: config.url,
-                data: { id: id, _method: 'DELETE' }})
+{{--//--}}
+{{--// var address = $("address").val();--}}
+{{--// var city = $("city").val();--}}
+{{--// var state = $("state").val();--}}
+{{--// var zipcode = $("zipcode").val();--}}
+{{--// var vendor_id = $("vendor_id").val();--}}
+{{--//--}}
+{{--            $.ajax({--}}
+{{--                headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}"},--}}
+{{--                method: 'POST',--}}
+{{--                url: config.url,--}}
+{{--                data: { id: id, _method: 'DELETE' }})--}}
 
-                .done(function () { location.reload() })});
+{{--                .done(function () { location.reload() })});--}}
 
     </script>
 
