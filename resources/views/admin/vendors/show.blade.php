@@ -466,7 +466,8 @@
                                                             @method('DELETE')
                                                             <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
                                                             <input type="hidden" name="vendor_page" value="1">
-                                                            <button type="submit" class="btn btn-danger">Delete</button>
+
+                                                            @if (Auth::user()->email == 'kyates@mddistributors.com')  <button type="submit" class="btn btn-danger">Delete</button> @endif
                                                         </td></form>
 
                                                 </tr>
