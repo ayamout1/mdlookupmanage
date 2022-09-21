@@ -115,6 +115,16 @@ class ContactController extends Controller
             'extension' => $request->extension,
             'vendor_id' => $request->vendor_id
         ]);
+        Address::Create([
+            'contact' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'address' => $request->address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'zipcode' => $request->zipcode,
+            'vendor_id' => $request->vendor_id
+        ]);
 
 
 
@@ -124,7 +134,7 @@ class ContactController extends Controller
     }
     public function store(StoreContactRequest $request)
     {
-        $contact = Contact::create($request->all());
+     Contact::create($request->all());
 
 
         Address::Create([
@@ -138,7 +148,7 @@ class ContactController extends Controller
             'vendor_id' => $request->vendor_id
         ]);
 
-        return back();
+        return redirect()->route('admin.vendors.show',$request->vendor_id);
     }
 
     public function edit(Contact $contact)

@@ -179,14 +179,14 @@
                                                            <button type="submit" class="btn btn-danger">Edit</button>
                                                         </td></form>
 
-                                                    <form action="{{ route('admin.contacts.destroy',$cdata->id) }}" id="contactdelete" method="POST">
+                                                    <form action="{{ route('admin.contacts.destroy',$cdata->id) }}" name="contactdelete" id="contactdelete" method="POST">
 
                                                         <td class="khara d-none">@csrf
                                                             @method('DELETE')
                                                             <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
                                                             <input type="hidden" name="vendor_page" value="1">
-                                                            @if ($loop->last)    @else<button type="submit" class="btn btn-danger">Delete Contact</button>@continue
-                                                        </td></form> @endif
+                                                          <button type="submit" class="btn btn-danger">Delete Contact</button>
+                                                        </td></form>
                                                 </tr>
                                             @endforeach
 
@@ -195,7 +195,8 @@
                                         <div class="contactadd d-none" id="contact-form">
                                             <div class="card-body">
                                                 <h4 class="mb-4">Add Contact</h4>
-                                                <form action="{{ route('admin.contacts.store') }}" name="contactForm" class="form-horizontal" method="POST" enctype="multipart/form-data">
+
+                                                <form action="{{ route('admin.contacts.store') }}" name="contactForm" class="form-horizontal" method="POST">
                                                     @csrf
 
                                                     <div class="row">
@@ -271,11 +272,12 @@
                                                     </div>
 
                                                 </form></div></div>
+                                        <div class="khara d-none"><a class="btn btn-primary" href="#contact-form" onclick="contactadd()" id="contactadd">Add Contact</a></div>
+                                    </div></div>
 
-                                    </div>
-                                    <div class="khara d-none"><a class="btn btn-primary" href="#contact-form" onclick="contactadd()" id="contactadd">Add Contact</a></div>
 
-</div>
+
+
                                 <div class="tab-pane" id="locations" role="tabpanel">
                                     <div class="table-responsive">
                                         <table class="table table-striped mb-0">
