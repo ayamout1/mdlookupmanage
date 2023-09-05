@@ -28,16 +28,33 @@ class DataChangeEmailNotification extends Notification
 
     public function getMessage()
     {
+        $subject = sprintf('%s: Entry %s in %s', config('app.name'), ucfirst($this->data['action']), $this->data['model_name']);
+        $greeting = 'Hello,';
+        $infoLine = sprintf('We would like to inform you that an entry has been %s in %s.', $this->data['action'], $this->data['model_name']);
+        $newValues = "New Values:";
+        $oldValues = "Old Values:";
+        $changeBlock = "```" . PHP_EOL . $this->data['change'] . PHP_EOL . "```";
+        $originalBlock = "```" . PHP_EOL . $this->data['original'] . PHP_EOL . "```";
+        $vendorNameLine = isset($this->data['vendor']) ? 'Vendor: ' . $this->data['vendor'] : ''; // Add vendor if it exists
+        $UserNameLine = isset($this->data['changed_by']) ? 'User: ' . $this->data['changed_by'] : ''; // Add user if it exists
+        $thankYouLine = 'Thank you';
+        $teamLine = config('app.name') . ' Team';
+        $websiteLine = 'www.mdvendorlist.com';
+
         return (new MailMessage())
-            ->subject(config('app.name') . ': entry ' . $this->data['action'] . ' in ' . $this->data['model_name'])
-            ->greeting('Hi,')
-            ->line('we would like to inform you that entry has been ' . $this->data['action'] . '  in ' . $this->data['model_name'])
-            ->line('New Values = '.$this->data['change'])
-            ->line('Old Values = '.$this->data['original'])
-            ->line('Vendor = '.$this->data['vendor'])
-            ->line('Thank you')
-            ->line(config('app.name') . ' Team')
-            ->line('www.mdvendorlist.com')
+            ->subject($subject)
+            ->greeting($greeting)
+            ->line($infoLine)
+            ->line($newValues)
+            ->line($changeBlock)
+            ->line($oldValues)
+            ->line($originalBlock)
+            ->line($vendorNameLine) // Include the vendor name line
+            ->line($UserNameLine) // Include the User name line
+            ->line($thankYouLine)
+            ->line($teamLine)
+            ->line($websiteLine)
             ->salutation(' ');
     }
+
 }
